@@ -8,25 +8,8 @@ class User extends AppModel {
     return array('admin', 'author', 'user');
   }
 
-  public static function memberFor($created) {
-    $d1 = new DateTime('now');
-    $d2 = new DateTime($created);
-    $interval = $d1->diff($d2);
-    if($interval->y > 0) {
-      return $interval->y . ' years';
-    }
-    else if($interval->m > 0) {
-      return $interval->m . ' months';
-    }
-    else if($interval->d > 0) {
-      return $interval->d . ' days';
-    }
-    else if($interval->h > 0) {
-      return $interval->h . ' hours';
-    }
-    else {
-      return $interval->i . ' minutes';
-    }
+  public static function statuses() {
+    return array('pending', 'active', 'blocked');
   }
 
   public function beforeSave() {

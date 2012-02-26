@@ -4,7 +4,7 @@ class UsersController extends AppController {
   public $helpers = array('Html', 'Form', 'Paginator');
 
   public $paginate = array(
-    'fields' => array('id', 'username', 'role', 'created'),
+    'fields' => array('id', 'username', 'status', 'role', 'created', 'last_login'),
     'limit' => 25
   );
 
@@ -24,8 +24,7 @@ class UsersController extends AppController {
   }
 
   public function add() {
-    $this->User->id = null;
-    $this->set_roles();
+    $this->init();
     if($this->request->is('post')) {
       if($this->User->save($this->request->data)) {
         $this->Session->setFlash('User has been added.');
@@ -38,8 +37,7 @@ class UsersController extends AppController {
   }
 
   public function edit($id = null) {
-    $this->User->id = $id;
-    $this->set_roles();
+    $this->init($id);
     if($this->request->is('get')) {
       $this->request->data = $this->User->read();
       $this->request->data['User']['password'] = '';
@@ -55,12 +53,26 @@ class UsersController extends AppController {
     }
   }
 
-  private function set_roles() {
+  private function init($id = null) {
+    $this->User->id = $id;
+    $this->set_role_options();
+    $this->set_status_options();
+  }
+
+  private function set_role_options() {
     $role_options = array();
     foreach(User::roles() as $role) {
       $role_options[$role] = $role;
     }
-    $this->set('roles', $role_options);
+    $this->set('role_options', $role_options);
+  }
+
+  private function set_status_options() {
+    $status_options = array();
+    foreach(User::statuses() as $status) {
+      $status_options[$status] = $status;
+    }
+    $this->set('status_options', $status_options);
   }
 }
 ?>

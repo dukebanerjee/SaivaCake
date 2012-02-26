@@ -26,11 +26,16 @@ echo $this->Form->create('User', array(
   <h2>Account Information</h2>
   <?php
     echo $this->Form->input('username');
+    echo $this->Form->input('password');
+    echo $this->Form->input('__confirm_password');
     echo $this->Form->input('role', array(
-      'options' => $roles,
+      'options' => $role_options,
       'empty' => '(choose role)'
     ));
-    echo $this->Form->input('password');
+    echo $this->Form->input('status', array(
+      'options' => $status_options,
+      'empty' => '(choose status)'
+    ));
   ?>
 </div>
 <?php

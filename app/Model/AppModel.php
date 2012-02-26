@@ -31,4 +31,29 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+  public static function intervalUntilNow($time) {
+    if(empty($time)) {
+      return "Never";
+    }
+
+    $d1 = new DateTime('now');
+    $d2 = new DateTime($time);
+    $interval = $d1->diff($d2);
+
+    if($interval->y > 0) {
+      return $interval->y . ' years';
+    }
+    else if($interval->m > 0) {
+      return $interval->m . ' months';
+    }
+    else if($interval->d > 0) {
+      return $interval->d . ' days';
+    }
+    else if($interval->h > 0) {
+      return $interval->h . ' hours';
+    }
+    else {
+      return $interval->i . ' minutes';
+    }
+  }
 }
