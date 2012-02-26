@@ -34,5 +34,7 @@ echo $this->Form->create('User', array(
   ?>
 </div>
 <?php
-echo $this->Form->end($this->fetch('submit_label'));
+echo $this->Form->submit($this->fetch('submit_label'));
+echo $this->Html->link('Cancel', array('controller' => 'users', 'action' => 'index'), array('class' => 'cancel'));
+echo $this->Form->end();
 ?>

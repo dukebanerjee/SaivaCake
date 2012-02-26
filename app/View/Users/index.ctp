@@ -1,4 +1,8 @@
 <h1>Users</h1>
+<div>
+  <?php echo $this->Html->link('Add User', 
+    array('controller' => 'users', 'action' => 'add')); ?>
+</div>
 <table>
   <thead>
     <tr>
@@ -17,6 +21,10 @@
       <td>
         <?php echo $this->Html->link('Edit', 
           array('controller' => 'users', 'action' => 'edit', $user['User']['id'])); ?>
+        <?php echo $this->Html->link('Delete', 
+          array('controller' => 'users', 'action' => 'delete', $user['User']['id']),
+          array(),
+          "Are you sure you want to delete the user?"); ?>
       </td>
     </tr>
     <?php endforeach; ?> 

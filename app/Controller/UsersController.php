@@ -13,6 +13,16 @@ class UsersController extends AppController {
     $this->set('data', $data);
   }
 
+  public function delete($id = null) {
+    if($this->User->delete($id)) {
+      $this->Session->setFlash('User has been deleted');
+    }
+    else {
+      $this->Session->setFlash('User could not be deleted');
+    }
+    $this->redirect(array('action' => 'index'));
+  }
+
   public function add() {
     $this->User->id = null;
     $this->set_roles();
