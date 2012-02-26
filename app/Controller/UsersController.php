@@ -1,12 +1,33 @@
 <?php
+App::uses('AuthComponent', 'Controller/Component');
+
 class UsersController extends AppController {
   public $name = 'Users';
-  public $helpers = array('Html', 'Form', 'Paginator');
+  public $helpers = array('Html', 'Form', 'Paginator', 'Session');
 
   public $paginate = array(
     'fields' => array('id', 'username', 'status', 'role', 'created', 'last_login'),
     'limit' => 25
   );
+
+  public function login() {
+    $user = $this->User->findByUsernameAndPassword(
+      $this->request->data['User']['username'], 
+      AuthComponent::password($this->request->data['User']['password']));
+    if($user) {
+      $this->Session->write('loggedInUser', $user);
+    }
+    else {
+      $this->Session->setFlash('Unknown username and password');
+    }
+    $this->redirect($this->referer());
+  }
+
+  public function logout() {
+      $this->Session->delete('loggedInUser');
+      $this->Session->destroy();
+      $this->redirect('/');
+  }
 
   public function index() {
     $data = $this->paginate('User');
