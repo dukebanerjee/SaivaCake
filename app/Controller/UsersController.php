@@ -14,6 +14,7 @@ class UsersController extends AppController {
   }
 
   public function add() {
+    $this->User->id = null;
     $this->set_roles();
     if($this->request->is('post')) {
       if($this->User->save($this->request->data)) {
@@ -34,7 +35,6 @@ class UsersController extends AppController {
       $this->request->data['User']['password'] = '';
     }
     else if($this->request->is('put')) {
-      xyz;
       if($this->User->save($this->request->data)) {
         $this->Session->setFlash('User has been updated.');
         $this->redirect(array('action' => 'index'));
