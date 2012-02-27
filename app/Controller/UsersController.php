@@ -11,6 +11,8 @@ class UsersController extends AppController {
   );
 
   public function login() {
+    $this->Session->delete('loggedInUser');
+    $this->Session->destroy();
     $user = $this->User->login(
       $this->request->data['User']['username'], 
       $this->request->data['User']['password']);

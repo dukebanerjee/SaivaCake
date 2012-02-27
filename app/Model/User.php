@@ -17,16 +17,14 @@ class User extends AppModel {
 
   public function login($username, $password) {
     $user = $this->find('first', array(
-      'condition' => array(
+      'conditions' => array(
         'username' => $username,
         'password' => AuthComponent::password($password)
       )
     ));
     if($user) {
       $this->set($user);
-      $this->set('password', '');
-      $this->set('last_login', date('Y-m-d H:i:s', strtotime('now')));
-      $this->save();
+      $this->saveField('last_login', date('Y-m-d H:i:s', strtotime('now')));
       return $user;
     }
     return false;

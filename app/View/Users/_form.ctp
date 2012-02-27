@@ -27,7 +27,7 @@ echo $this->Form->create('User', array(
   <?php
     echo $this->Form->input('username');
     echo $this->Form->input('password');
-    echo $this->Form->input('__confirm_password');
+    echo $this->Form->input('__confirm_password', array('type' => 'password'));
     echo $this->Form->input('role', array(
       'options' => $role_options,
       'empty' => '(choose role)'
