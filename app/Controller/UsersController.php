@@ -33,7 +33,7 @@ class UsersController extends AppController {
 
   public function index() {
     $data = $this->paginate('User');
-    $this->set('data', $data);
+    $this->set('users', $data);
   }
 
   public function delete($id = null) {

@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach($data as $user): ?>
+    <?php foreach($users as $user): ?>
     <tr>
       <td><?php echo $user['User']['username']; ?></td>
       <td><?php echo $user['User']['status']; ?></td>
@@ -34,6 +34,6 @@
     <?php endforeach; ?> 
   </tbody>
 </table>
-  <div id="page-numbers">
-    <?php echo $this->Paginator->numbers(array('before' => 'Pages: ', 'first' => 2, 'last' => 2)); ?>
-  </div>
+<div id="page-numbers">
+  <?php echo $this->Paginator->numbers(array('before' => 'Pages: ', 'first' => 2, 'last' => 2)); ?>
+</div>
