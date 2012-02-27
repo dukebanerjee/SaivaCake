@@ -20,7 +20,7 @@ class UsersController extends AppController {
     else {
       $this->Session->setFlash('Unknown username and password');
     }
-    //$this->redirect($this->referer());
+    $this->redirect($this->referer());
   }
 
   public function logout() {
