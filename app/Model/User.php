@@ -1,5 +1,6 @@
 <?php
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('CakeTime', 'Utility');
 
 class User extends AppModel {
   public $name = 'User';
@@ -12,6 +13,23 @@ class User extends AppModel {
 
   public static function statuses() {
     return array('pending', 'active', 'blocked');
+  }
+
+  public function login($username, $password) {
+    $user = $this->find('first', array(
+      'condition' => array(
+        'username' => $username,
+        'password' => AuthComponent::password($password)
+      )
+    ));
+    if($user) {
+      $this->set($user);
+      $this->set('password', '');
+      $this->set('last_login', date('Y-m-d H:i:s', strtotime('now')));
+      $this->save();
+      return $user;
+    }
+    return false;
   }
 
   public function beforeSave() {

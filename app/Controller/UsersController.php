@@ -11,16 +11,16 @@ class UsersController extends AppController {
   );
 
   public function login() {
-    $user = $this->User->findByUsernameAndPassword(
+    $user = $this->User->login(
       $this->request->data['User']['username'], 
-      AuthComponent::password($this->request->data['User']['password']));
+      $this->request->data['User']['password']);
     if($user) {
       $this->Session->write('loggedInUser', $user);
     }
     else {
       $this->Session->setFlash('Unknown username and password');
     }
-    $this->redirect($this->referer());
+    //$this->redirect($this->referer());
   }
 
   public function logout() {
