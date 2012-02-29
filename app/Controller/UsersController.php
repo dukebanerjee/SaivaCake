@@ -11,10 +11,15 @@ class UsersController extends AppController {
   );
 
   public function login() {
-    if(!$this->Auth->login()) {
-      $this->Session->setFlash('Unknown username and password');
+    if($this->request->is('get')) {
+      $this->redirect('/');
     }
-    $this->redirect($this->referer());
+    else {
+      if(!$this->Auth->login()) {
+        $this->Session->setFlash('Unknown username and password');
+      }
+      $this->redirect($this->referer());
+    }
   }
 
   public function logout() {
