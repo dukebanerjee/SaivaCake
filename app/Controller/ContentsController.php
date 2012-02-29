@@ -1,12 +1,18 @@
 <?php
 class ContentsController extends AppController {
   public $name = 'Contents';
-  public $helpers = array('Html', 'Form', 'Paginator', 'Session');
+  
+  public $helpers = array('Html', 'Form', 'Paginator', 'Session'); 
 
   public $paginate = array(
     'fields' => array('id', 'title', 'type', 'status', 'author_id', 'created', 'modified', 'Author.username'),
     'limit' => 25
   );
+
+  public function beforeFilter() {
+    parent::beforeFilter();
+    $this->Auth->deny();
+  }
 
   public function index() {
     $data = $this->paginate();
@@ -27,6 +33,7 @@ class ContentsController extends AppController {
     if($this->request->is('post')) {
       $this->request->data['Content']['status'] = 'published';
       $this->request->data['Content']['type'] = 'contents';
+      $this->request->data['Content']['author_id'] = $this->Auth->user('id');
     
       if($this->Content->save($this->request->data)) {
         $this->Session->setFlash('Content has been added.');

@@ -11,24 +11,14 @@ class UsersController extends AppController {
   );
 
   public function login() {
-    $this->Session->delete('loggedInUser');
-    $this->Session->destroy();
-    $user = $this->User->login(
-      $this->request->data['User']['username'], 
-      $this->request->data['User']['password']);
-    if($user) {
-      $this->Session->write('loggedInUser', $user);
-    }
-    else {
+    if(!$this->Auth->login()) {
       $this->Session->setFlash('Unknown username and password');
     }
     $this->redirect($this->referer());
   }
 
   public function logout() {
-      $this->Session->delete('loggedInUser');
-      $this->Session->destroy();
-      $this->redirect('/');
+      $this->redirect($this->Auth->logout());
   }
 
   public function index() {
