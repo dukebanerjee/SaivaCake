@@ -14,6 +14,10 @@ class ContentsController extends AppController {
     $this->Auth->deny();
   }
 
+  public function display($id = 'home') {
+    $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+  }
+
   public function index() {
     $data = $this->paginate();
     $this->set('contents', $data);
