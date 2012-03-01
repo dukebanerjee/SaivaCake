@@ -817,6 +817,50 @@ form.login input {
   float: left;
 }
 
+/** Menus **/
+
+#menu-destinations {
+  padding: 0;
+  margin: 0;
+  float: right;
+  padding-left: 20px;
+  background-image: url('../img/-t-left.jpg');
+  background-repeat: no-repeat;
+}
+
+#menu-destinations li {
+  background-image: url('../img/-t-center.jpg');
+  background-repeat: repeat-x;
+  padding: 0;
+  margin: 0;
+  padding-right: 3em;
+  padding-top: 5px;
+  height: 32px;
+}
+
+ul.menu, ul.menu li {
+  color: #262626;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  list-style: none;
+  float: left;
+}
+
+ul.menu {
+  padding: 0;
+  margin: 0;
+}
+
+.navigation a {
+  color: #262626;
+  text-decoration: none;
+}  
+
+.navigation a:hover {
+  color: #262626;
+  text-decoration: underline;
+}
+
 /** Miscellanous **/
 
 #skip-link {
