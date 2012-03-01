@@ -819,6 +819,34 @@ form.login input {
 
 /** Menus **/
 
+ul.menu, ul.menu li {
+  color: #262626;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  list-style: none;
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+
+ul.menu li {
+  padding-right: 3em;
+  padding-top: 5px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.navigation a {
+  color: #262626;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: normal;
+}  
+
+.navigation a:hover {
+  text-decoration: underline;
+}
+
 #menu-destinations {
   padding: 0;
   margin: 0;
@@ -831,37 +859,6 @@ form.login input {
 #menu-destinations li {
   background-image: url('../img/-t-center.jpg');
   background-repeat: repeat-x;
-  padding: 0;
-  margin: 0;
-  padding-right: 3em;
-  padding-top: 5px;
-  height: 32px;
-}
-
-ul.menu, ul.menu li {
-  color: #262626;
-  font-family: Arial, Verdana, Helvetica, sans-serif;
-  font-size: 12px;
-	font-weight: normal;
-  list-style: none;
-  float: left;
-}
-
-ul.menu {
-  padding: 0;
-  margin: 0;
-}
-
-.navigation a {
-  color: #262626;
-  text-decoration: none;
-  font-weight: normal;
-}  
-
-.navigation a:hover {
-  color: #262626;
-  text-decoration: underline;
-  font-weight: normal;
 }
 
 /** Miscellanous **/
