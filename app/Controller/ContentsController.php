@@ -12,10 +12,20 @@ class ContentsController extends AppController {
   public function beforeFilter() {
     parent::beforeFilter();
     $this->Auth->deny();
+    $this->Auth->allow('display');
   }
 
   public function display($id = 'home') {
-    $this->redirect(array('controller' => 'pages', 'action' => 'home'));
+    $content = $this->Content->findByIdOrAlias($id, $id);
+    if($content) {
+      $this->set('content', $content);
+    }
+    else if($id == 'home') {
+      $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+    }
+    else {
+      throw new NotFoundException();    
+    }
   }
 
   public function index() {

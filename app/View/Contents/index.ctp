@@ -25,6 +25,8 @@
       <td><?php echo AppModel::intervalUntilNow($content['Content']['created']); ?></td>
       <td><?php echo AppModel::intervalUntilNow($content['Content']['modified']); ?></td>
       <td>
+        <?php echo $this->Html->link('View', 
+          array('controller' => $content['Content']['type'], 'action' => 'display', $content['Content']['id'])); ?>
         <?php echo $this->Html->link('Edit', 
           array('controller' => $content['Content']['type'], 'action' => 'edit', $content['Content']['id'])); ?>
         <?php echo $this->Html->link('Delete', 
