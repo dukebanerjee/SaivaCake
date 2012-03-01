@@ -758,3 +758,11 @@ form.login input {
   margin-left: 5px;
 }
 
+/** Miscellanous **/
+
+#skip-link {
+  display: none;
+  width: 0;
+  height: 0;
+  text-indent: -1000px;
+}
