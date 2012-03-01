@@ -23,7 +23,7 @@
 
 /** General Style Info **/
 body {
-	background: #003d4c;
+	background-image: url('../img/main-bg.jpg');
 	color: #fff;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
@@ -75,6 +75,9 @@ p {
 /** Layout **/
 #container {
 	text-align: left;
+  width: 980px;
+  margin: auto;
+  padding: 0;
 }
 
 #header{
@@ -756,6 +759,62 @@ form.login div {
 form.login input {
   width: 5em;
   margin-left: 5px;
+}
+
+/** SAIVA layout **/
+
+#header {
+  width: 980px;
+  height: 100px;
+  padding: 0;
+  margin: 0;
+}
+
+#header-top {
+  border: 1px solid red;
+  width: 980px;
+  height: 93px;
+  padding: 0;
+  margin: 0;
+}
+
+#top-gutter-left {
+  width: 4px;
+  height: 93px;
+  padding: 0;
+  margin: 0;
+  background-image: url('../img/top-left.jpg');
+  background-repeat: no-repeat;
+  float: left;
+  clear: none;  
+}
+
+#top-gutter-right {
+  width: 4px;
+  height: 93px;
+  padding: 0;
+  margin: 0;
+  background-image: url('../img/top-right.jpg');
+  background-repeat: no-repeat;
+  float: left;
+  clear: none;
+}
+
+#top-center {
+  width: 971px;
+  height: 93px;
+  padding: 0;
+  margin: 0;
+  background-image: url('../img/top-center.jpg');
+  background-repeat: repeat-x;
+  float: left;
+  clear: none;
+}
+
+#logo {
+  padding-top: 5px;
+  padding-left: 41px;
+  float: left;
 }
 
 /** Miscellanous **/

@@ -39,7 +39,12 @@
   </div>
 	<div id="container">
 		<div id="header">
-      <?php echo $this->Html->image('logo.jpg', array('alt' => 'SAIVA', 'border' => '0')) ?>
+      <div id="top-gutter-left"></div>
+      <div id="top-center">  
+        <?php echo $this->Html->image('logo.jpg', array('alt' => 'SAIVA', 'border' => '0', 'id' => 'logo')) ?>
+      </div>
+      <div id="top-gutter-right"></div>
+      <?php echo $this->element('login_panel'); ?>
 		</div>
 		<div id="content">
       <a id="main-content"></a>
