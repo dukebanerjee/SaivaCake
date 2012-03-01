@@ -842,6 +842,7 @@ ul.menu, ul.menu li {
   color: #262626;
   font-family: Arial, Verdana, Helvetica, sans-serif;
   font-size: 12px;
+	font-weight: normal;
   list-style: none;
   float: left;
 }
@@ -854,11 +855,13 @@ ul.menu {
 .navigation a {
   color: #262626;
   text-decoration: none;
+  font-weight: normal;
 }  
 
 .navigation a:hover {
   color: #262626;
   text-decoration: underline;
+  font-weight: normal;
 }
 
 /** Miscellanous **/
