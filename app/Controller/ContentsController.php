@@ -20,6 +20,7 @@ class ContentsController extends AppController {
     if($content) {
       $this->set('title_for_layout', $content['Content']['title']);
       $this->set('content', $content);
+      $this->render($content['Content']['type'] . '/display');
     }
     else if($id == 'home') {
       $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
