@@ -26,11 +26,11 @@
       <td><?php echo AppModel::intervalUntilNow($content['Content']['modified']); ?></td>
       <td>
         <?php echo $this->Html->link('View', 
-          array('controller' => $content['Content']['type'], 'action' => 'display', $content['Content']['id'])); ?>
+          array('controller' => 'contents', 'action' => 'display', $content['Content']['id'])); ?>
         <?php echo $this->Html->link('Edit', 
-          array('controller' => $content['Content']['type'], 'action' => 'edit', $content['Content']['id'])); ?>
+          array('controller' => 'contents', 'action' => 'edit', $content['Content']['id'])); ?>
         <?php echo $this->Html->link('Delete', 
-          array('controller' => $content['Content']['type'], 'action' => 'delete', $content['Content']['id']),
+          array('controller' => 'contents', 'action' => 'delete', $content['Content']['id']),
           array(),
           "Are you sure you want to delete the content?"); ?>
       </td>
