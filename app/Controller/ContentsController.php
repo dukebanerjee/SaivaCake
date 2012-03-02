@@ -65,6 +65,9 @@ class ContentsController extends AppController {
     $this->Content->id = $id;
     if($this->request->is('get')) {
       $this->request->data = $this->Content->read();
+      if(!$this->request->data) {
+        throw new NotFoundException();
+      }
     }
     else if($this->request->is('put')) {
       if($this->Content->save($this->request->data)) {
