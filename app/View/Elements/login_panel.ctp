@@ -1,6 +1,6 @@
 <div id="login-panel">
 <?php
-if($loggedInUser) {
+if($this->Session->check('Auth.User')) {
   echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'));  
 }
 else {

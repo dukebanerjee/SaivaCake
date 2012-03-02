@@ -41,6 +41,5 @@ class AppController extends Controller {
 
   public function beforeFilter() {
     $this->Auth->allow('*');
-    $this->set('loggedInUser', $this->Auth->user());
   }
 }

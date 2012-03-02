@@ -52,7 +52,7 @@
           </ul>
           <ul class="menu navigation">
           <li><a href="#">Logout</a></li>
-          <li><a href="#" class="active">Welcome admin</a></li>
+          <li><a href="#" class="active">Welcome <?php $user = $this->Session->read('Auth.User'); echo $user['first_name'] ?> </a></li>
           </ul>
         </div>
       </div>
