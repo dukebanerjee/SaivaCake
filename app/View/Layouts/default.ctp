@@ -41,7 +41,6 @@
 		<div id="header">
       <div id="top-gutter-left"></div>
       <div id="top-center">  
-        <?php echo $this->Html->image('logo.jpg', array('alt' => 'SAIVA', 'border' => '0', 'id' => 'logo')) ?>
         <div id="menu-destinations">
           <?php echo $this->element('menu', array("menu_id" => "destinations")); ?>
           <ul class="menu navigation">
@@ -52,6 +51,10 @@
           </ul>
         </div>
         <?php echo $this->element('login_panel'); ?>
+        <div id="logo">
+          <?php echo $this->Html->image('logo.jpg', array('alt' => 'SAIVA', 'border' => '0')) ?>
+          <div>Promote friendship, education and well-being through volunteering</div>
+        </div>
       </div>
       <div id="top-gutter-right"></div>
 		</div>

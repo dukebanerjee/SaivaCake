@@ -790,6 +790,15 @@ form.login input {
   padding-top: 5px;
   padding-left: 41px;
   float: left;
+  margin-top: -80px;
+}
+
+#logo div {
+  color: #282828;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 5px;
 }
 
 /** Menus **/
@@ -840,6 +849,7 @@ ul.menu li {
 
 #login-panel {
   float: right;
+  clear: right;
   width: 430px;
 }
 
