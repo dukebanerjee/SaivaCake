@@ -153,6 +153,8 @@ class Menu extends AppModel {
       foreach($menu_ids_with_children as $menu_id) {
         $ids_with_children[] = $menu_id['Menu']['parent_id'];      
       }
+      // Add an ID that will never match to ensure that the array doesn't coalesce into a NULL in
+      // the SQL query - in PHP, an empty array is equivalent to null.
       $ids_with_children[] = 0;
 
       // Delete the parent menu definitions that belong to content_id that have no child menu definitions
