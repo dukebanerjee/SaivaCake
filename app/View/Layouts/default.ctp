@@ -46,14 +46,14 @@
           <?php echo $this->element('menu', array("menu_id" => "destinations")); ?>
           <ul class="menu navigation">
           <?php if($this->Session->check('Auth.User')) { ?>
-          <li><a href="#">Logout</a></li>
+          <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
           <?php } ?>
           <li><a href="#" class="active">Welcome <?php $user = $this->Session->read('Auth.User'); echo $user['first_name'] ?> </a></li>
           </ul>
         </div>
+        <?php echo $this->element('login_panel'); ?>
       </div>
       <div id="top-gutter-right"></div>
-      <?php echo $this->element('login_panel'); ?>
 		</div>
 		<div id="content">
       <a id="main-content"></a>

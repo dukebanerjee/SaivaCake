@@ -1,21 +1,4 @@
 @charset "utf-8";
-/**
- *
- * Generic CSS for CakePHP
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.webroot.css
- * @since         CakePHP(tm)
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
-
 * {
 	margin:0;
 	padding:0;
@@ -764,16 +747,8 @@ form.login input {
 /** SAIVA layout **/
 
 #header {
-  width: 980px;
+  width: 1000px;
   height: 100px;
-  padding: 0;
-  margin: 0;
-}
-
-#header-top {
-  border: 1px solid red;
-  width: 980px;
-  height: 93px;
   padding: 0;
   margin: 0;
 }
@@ -790,7 +765,7 @@ form.login input {
 }
 
 #top-gutter-right {
-  width: 4px;
+  width: 3px;
   height: 93px;
   padding: 0;
   margin: 0;
@@ -859,6 +834,44 @@ ul.menu li {
 #menu-destinations li {
   background-image: url('../img/-t-center.jpg');
   background-repeat: repeat-x;
+}
+
+/** User login **/
+
+#login-panel {
+  float: right;
+  width: 430px;
+}
+
+#login-panel div,
+#login-panel form {
+  float: left;
+}
+
+#login-panel div.input, 
+#login-panel div.login {
+  margin: 0;
+  padding: 0;
+}
+
+#login-panel div.input input {
+  width: 7em;
+}
+
+#login-panel div#reset-link a {
+  float: left;
+  color: #636363;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 100;
+  margin-top: 5px;
+  margin-left: 215px;
+}
+
+#login-panel div#reset-link a:hover {
+  color: #636363;
+  text-decoration: underline;
 }
 
 /** Miscellanous **/
