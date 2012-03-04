@@ -71,9 +71,25 @@
 
 			  <?php echo $this->fetch('content'); ?>
 		  </div>
+		  <div id="quicklinks">
+        <div id="quicklinks-gutter-left"></div>
+        <div id="quicklinks-center">
+          <div id="menu-quick-links">
+            <b>Quick Links</b>
+            <?php echo $this->element('menu', array("menu_id" => "quicklinks", "class" => "navigation")); ?>
+          </div>
+        </div>
+        <div id="quicklinks-gutter-right"></div>
+		  </div>
+      <div id="footer">
+        <div id="footer-gutter-left"></div>
+        <div id="footer-center">
+          <div id="footer-left">SAIVA - Division of the Saxena Foundation, Inc.</div>
+          <div id="footer-right">Copyright &copy; 2010-2011 SAIVA. All Rights Reserved.</div>
+        </div>
+        <div id="footer-gutter-right"></div>
+		  </div>
     </div>
-		<div id="footer">
-		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
 </body>

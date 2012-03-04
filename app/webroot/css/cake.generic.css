@@ -882,6 +882,75 @@ form.login input {
   float: left;
 }
 
+#quicklinks {
+  padding: 0;
+  padding-top: 10px;
+  clear: both;
+}
+
+#quicklinks-gutter-left {
+  background-image: url('../img/box3-left.jpg');
+  width: 11px;
+  height: 36px;
+  float: left;
+}
+
+#quicklinks-center {
+  background-image: url('../img/box3-center.jpg');
+  width: 920px;
+  height: 36px;
+  float: left;
+}
+
+#quicklinks-gutter-right {
+  background-image: url('../img/box3-right.jpg');
+  width: 11px;
+  height: 36px;
+  float: left;
+}
+
+#footer {
+  float: left;
+  padding: 0;
+  padding-top: 10px;
+  clear: both;
+}
+
+#footer-gutter-left {
+  background-image: url('../img/box4-left.jpg');
+  width: 10px;
+  height: 50px;
+  float: left;
+}
+
+#footer-center {
+  background-image: url('../img/box4-center.jpg');
+  width: 920px;
+  height: 50px;
+  float: left;
+}
+
+#footer-gutter-right {
+  background-image: url('../img/box4-right.jpg');
+  width: 10px;
+  height: 50px;
+  float: left;
+}
+
+#footer-left {
+  margin: 0;
+  padding: 0;
+  float: left;
+  padding-top: 17px;
+}
+
+#footer-right {
+  margin: 0;
+  padding: 0;
+  float: right;
+  padding-top: 17px;
+}
+
 /** Menus **/
 
 ul.menu, ul.menu li {
