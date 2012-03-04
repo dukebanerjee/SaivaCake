@@ -46,14 +46,20 @@ class Menu extends AppModel {
 
   public function update_menu_definition($content_id, $all_menu_defs) {
     $menu_map = array();
+    $ids_to_delete = array(); 
     $existing_menu_items = $this->find('all');
     foreach($existing_menu_items as $menu_item) {
       $menu_id = $menu_item[$this->alias]['menu_id'];
       $title = $menu_item[$this->alias]['title'];
       $parent_id = $menu_item[$this->alias]['parent_id'];
-      $menu_map[$this->menu_map_key($menu_id, $title, $parent_id)] = $menu_item[$this->alias]['id'];          
+      $menu_map[$this->menu_map_key($menu_id, $title, $parent_id)] = $menu_item[$this->alias]['id'];
+
+      if($menu_item[$this->alias]['content_id'] == $content_id) {
+        $ids_to_delete[$menu_item[$this->alias]['id']] = true;
+      }
     }
 
+    // menu definition is: <menu-id>|{<title> or <title>|<subtitle>}[index]
     $menu_def_count = preg_match_all('/' .
       '\s*([^|;\[\]]*)\s*' .            // menu ID
       '\|' .                            // separator
@@ -98,14 +104,50 @@ class Menu extends AppModel {
           $menu[$this->alias]['parent_id'] = $parent_id;
           $menu[$this->alias]['title'] = $title;
         }
+
         $key = $this->menu_map_key($menu_id, $title, $parent_id);
         if(array_key_exists($key, $menu_map)) {
           $this->id = $menu_map[$key];  
         }
         $this->save($menu);
         $menu_map[$key] = $this->id;
+        unset($ids_to_delete[$this->id]);
         unset($this->id);
       }
+    }
+    $ids_to_delete = array_keys($ids_to_delete);
+    if(!empty($ids_to_delete)) {
+      $this->deleteAll(array(
+        $this->alias . '.id' => $ids_to_delete, 
+        $this->alias . '.parent_id !=' => null), 
+        false, false);
+  
+      $menu_ids_with_children = $this->find('all', array(
+        'fields' => array('parent_id'),
+        'conditions' => array(
+          $this->alias . '.parent_id' => $ids_to_delete
+        )
+      ));
+      $ids_with_children = array();
+      foreach($menu_ids_with_children as $menu_id) {
+        $ids_with_children[] = $menu_id['Menu']['parent_id'];      
+      }
+      $ids_with_children[] = 0;
+
+      $this->deleteAll(array(
+        'NOT' => array($this->alias . '.id' => $ids_with_children),
+        $this->alias . '.id' => $ids_to_delete    
+      ), false, false);
+
+      $this->updateAll(array(
+          $this->alias . '.controller' => "'contents'",
+          $this->alias . '.action' => "'display'",
+          $this->alias . '.parameter' => "'home'",
+          $this->alias . '.content_id' => null),
+        array(
+          $this->alias . '.id' => $ids_with_children,
+          $this->alias . '.id' => $ids_to_delete
+        ));
     }
   }
 }
