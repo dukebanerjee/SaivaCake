@@ -43,13 +43,7 @@
       <div id="top-center">  
         <?php echo $this->Html->image('logo.jpg', array('alt' => 'SAIVA', 'border' => '0', 'id' => 'logo')) ?>
         <div id="menu-destinations">
-          <ul class="menu navigation">
-            <li><a href="#" title=""><span>Blog</span></a></li>
-            <li><a href="#" title=""><span>Photos</span></a></li>
-            <li><a href="#" title=""><span>Videos</span></a></li>
-            <li><a href="#" title=""><span>Recipes</span></a></li>
-            <li><a href="#" title=""><span>Testimonials</span></a></li>
-          </ul>
+          <?php echo $this->element('menu', array("menu_id" => "destinations")); ?>
           <ul class="menu navigation">
           <li><a href="#">Logout</a></li>
           <li><a href="#" class="active">Welcome <?php $user = $this->Session->read('Auth.User'); echo $user['first_name'] ?> </a></li>
