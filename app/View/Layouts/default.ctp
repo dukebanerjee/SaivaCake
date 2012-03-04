@@ -63,7 +63,7 @@
       <div id="bottom">
         <div id="bottom-gutter-left"></div>
         <div id="bottom-center">
-            <?php echo $this->element('menu', array("menu_id" => "main")); ?>
+            <?php echo $this->element('menu', array("menu_id" => "main", "class" => "main-menu")); ?>
         </div>
         <div id="bottom-gutter-right"></div>
       </div>

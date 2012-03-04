@@ -890,6 +890,115 @@ ul.menu li {
   background-repeat: repeat-x;
 }
 
+ul.main-menu li ul {
+  display: none;
+  position: absolute;
+  top: 1em;
+  left: 0;
+}
+
+ul.main-menu li > ul {
+  /* IE hack */
+  top: auto;
+  left: auto;
+}
+
+ul.main-menu li:hover ul {
+  display: block;
+}
+
+ul.main-menu li {
+  margin-right: 0em;
+  margin-top: 17px;
+  margin-bottom: 11px;
+}
+
+ul.main-menu a {
+  color: #ffffff;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 100;
+  padding-top: 17px;
+  padding-bottom: 11px;
+  padding-right: 19px;
+  margin-right: 10px;
+}
+
+ul.main-menu span {
+  padding-top: 17px;
+  padding-bottom: 11px;
+  padding-left: 19px;
+}
+
+ul.main-menu > ul.menu > li.first a.active,
+ul.main-menu a.active-trail,
+ul.main-menu a:hover {
+  color: #ff0000;
+  background: transparent url('../img/button-right.jpg') no-repeat scroll top right;
+}
+
+ul.main-menu > ul.menu > li.first a.active span,
+ul.main-menu a.active-trail span,
+ul.main-menu a:hover span {
+  background: transparent url('../img/button-left.jpg') no-repeat;
+}
+
+ul.main-menu li ul a.active,
+ul.main-menu li ul a.active span,
+ul.main-menu li ul a,
+ul.main-menu li ul a span,
+ul.main-menu li ul a:hover,
+ul.main-menu li ul a:hover span {
+  background-image: none;
+}
+
+ul.main-menu li ul {
+  margin-top: 10px;
+  width: 200px;
+  border: 1px solid #CCCCCC;
+  font: normal 12px Verdana;
+  margin-left: 20px;
+  color: #000000;
+}
+
+ul.main-menu li ul li {
+  width: 190px;
+  margin: 0;
+  padding: 0;
+  background: white;
+  border-bottom: 1px solid #CCCCCC;
+  padding: 5px;
+}
+
+ul.main-menu li ul li,
+ul.main-menu li ul li a,
+ul.main-menu li ul li span {
+  background: white;
+  color: #A71305;
+}
+
+ul.main-menu li ul li:hover,
+ul.main-menu li ul li:hover a,
+ul.main-menu li ul li:hover span {
+  background: #E58411;
+  color: #ffffff;
+}
+
+ul.main-menu li ul a {
+  padding: 0;
+  margin: 0;  
+  width: 100%;
+  text-indent: 3px;
+  padding: 1px 0;
+  text-decoration: none;
+}
+
+ul.main-menu li ul span {
+  padding: 0;
+  margin: 0;
+}
+
 /** User login **/
 
 #login-panel {
