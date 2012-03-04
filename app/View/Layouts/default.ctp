@@ -74,8 +74,8 @@
 		  <div id="quicklinks">
         <div id="quicklinks-gutter-left"></div>
         <div id="quicklinks-center">
-          <div id="menu-quick-links">
-            <b>Quick Links</b>
+          <div id="menu-quicklinks">
+            <h2>Quick Links</h2>
             <?php echo $this->element('menu', array("menu_id" => "quicklinks", "class" => "navigation")); ?>
           </div>
         </div>

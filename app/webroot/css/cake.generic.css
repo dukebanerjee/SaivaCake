@@ -951,6 +951,43 @@ form.login input {
   padding-top: 17px;
 }
 
+#menu-quicklinks,
+#menu-quicklinks h2 {
+  padding: 0;
+  margin: 0;  
+  color: #262626;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#menu-quicklinks {
+  float: right;
+  background: transparent;
+}
+
+#menu-quicklinks h2 {
+  float: left;
+  background: transparent;  
+  background-image: url('../img/divider.jpg');
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  padding-top: 9px;
+  padding-bottom: 4px;
+}
+
+#menu-quicklinks li {
+  list-style-image: url('../img/list-separator.jpg');
+  padding-top: 9px;
+  padding-bottom: 4px;
+  padding-left: 12px;
+  padding-right: 24px;
+}
+
+#menu-quicklinks li.first {
+  list-style: none;
+}
+
 /** Menus **/
 
 ul.menu, ul.menu li {
