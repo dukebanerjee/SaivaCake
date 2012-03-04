@@ -61,6 +61,10 @@ class ContentsController extends AppController {
     }
   }
 
+  public function menu_map_key($menu_id, $title, $parent_id) {
+    return $menu_id . '|' . $title . '|' . $parent_id;
+  }
+
   public function edit($id) {
     $this->Content->id = $id;
     if($this->request->is('get')) {
@@ -72,7 +76,62 @@ class ContentsController extends AppController {
     else if($this->request->is('put')) {
       if($this->Content->save($this->request->data)) {
         $this->Session->setFlash('Content has been updated.');
-        $this->redirect(array('action' => 'index'));
+
+        $this->Content->Menu->deleteAll(array('Menu.content_id' => $this->Content->id));
+
+        $menu_map = array();
+        $all_menu_defs = $this->request->data['Content']['__menu'];
+        $menu_def_count = preg_match_all('/' .
+          '\s*([^|;\[\]]*)\s*' .            // menu ID
+          '\|' .                            // separator
+          '\s*([^|;\[\]]*)\s*' .            // menu item name
+          '(?:\|\s*([^|;\[\]]*)\s*)?' .     // optional second level
+          '(?:\[\s*([0-9]*)\s*\])?\s*;?' .  // optional index
+          '/', $all_menu_defs, $matches);
+        if($menu_def_count) {
+          for($i = 0; $i < $menu_def_count; $i++) {
+            $menu_id = $matches[1][$i];
+            $index = $matches[4][$i];
+            $title = $matches[2][$i];
+            $subtitle = $matches[3][$i];
+            $parent_id = null;
+            $menu = array('Menu' => array(
+              'controller' => 'contents',
+              'action' => 'display',
+              'parameter' => $this->Content->id,
+              'menu_id' => $menu_id,
+              'index' => $index,
+              'title' => $title,
+              'parent_id' => $parent_id,
+              'content_id' => $this->Content->id
+            ));
+
+            if(!empty($subtitle)) {
+              $parent_key = $this->menu_map_key($menu_id, $title, null);
+              if(!array_key_exists($parent_key, $menu_map)) {
+                $parent_menu = array('Menu' => array(
+                  'controller' => 'contents',
+                  'action' => 'display',
+                  'parameter' => 'home',
+                  'menu_id' => $menu_id,
+                  'title' => $title,
+                  'parent_id' => null));
+                $this->Content->Menu->save($parent_menu);
+                $menu_map[$parent_key] = $this->Content->Menu->id;
+                unset($this->Content->Menu->id);
+              }
+              $parent_id = $menu_map[$parent_key];
+              $title = $subtitle;
+              $menu['Menu']['parent_id'] = $parent_id;
+              $menu['Menu']['title'] = $title;
+            }
+            $this->Content->Menu->save($menu);
+            $menu_map[$this->menu_map_key($menu_id, $title, $parent_id)] = $this->Content->Menu->id;
+            unset($this->Content->Menu->id);
+          }
+        }
+
+        //$this->redirect(array('action' => 'index'));
       }
       else {
         $this->Session->setFlash('Content could not be updated.');

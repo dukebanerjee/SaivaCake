@@ -46,9 +46,9 @@
           <ul class="menu navigation">
             <li><a href="#" title=""><span>Blog</span></a></li>
             <li><a href="#" title=""><span>Photos</span></a></li>
-            <li><a href="/drupal/" title="" class="saiva_button active"><span>Videos</span></a></li>
-            <li class="leaf saiva_button"><a href="/drupal/" title="" class="saiva_button active"><span>Recipes</span></a></li>
-            <li class="last leaf saiva_button"><a href="/drupal/" title="" class="saiva_button active"><span>Testimonials</span></a></li>
+            <li><a href="#" title=""><span>Videos</span></a></li>
+            <li><a href="#" title=""><span>Recipes</span></a></li>
+            <li><a href="#" title=""><span>Testimonials</span></a></li>
           </ul>
           <ul class="menu navigation">
           <li><a href="#">Logout</a></li>
