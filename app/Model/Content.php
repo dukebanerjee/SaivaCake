@@ -10,6 +10,10 @@ class Content extends AppModel {
     )
   );
 
-  public $hasMany = 'Menu';
+  public $hasMany = array(
+    'Menu' => array(
+      'fields' => array('menu_id', 'title', 'index', 'parent_id')
+    )
+  );
 }
 ?>

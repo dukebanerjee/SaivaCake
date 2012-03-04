@@ -65,6 +65,20 @@ class ContentsController extends AppController {
     return $menu_id . '|' . $title . '|' . $parent_id;
   }
 
+  public function format_menu_item($menu_item) {
+    $menu_def = $menu_item['Menu']['menu_id'] . '|';
+    $title = $menu_item['Parent']['title'];
+    if(!empty($title)) {
+      $menu_def = $menu_def . $title . '|';
+    }
+    $menu_def = $menu_def . $menu_item['Menu']['title'];
+    $index = $menu_item['Menu']['index'];
+    if($index != null) {
+      $menu_def = $menu_def . '[' . $index . ']';
+    }
+    return $menu_def . '; ';
+  }
+
   public function edit($id) {
     $this->Content->id = $id;
     if($this->request->is('get')) {
@@ -72,6 +86,20 @@ class ContentsController extends AppController {
       if(!$this->request->data) {
         throw new NotFoundException();
       }
+
+      $menu_items = $this->Content->Menu->find('threaded', array(
+          'conditions' => array('Menu.content_id' => $id)
+      ));
+      $menu_defs = '';
+      foreach($menu_items as $menu_item) {
+        if($menu_item['Menu']['content_id'] == $id) {
+          $menu_defs = $menu_defs . $this->format_menu_item($menu_item);
+          foreach($menu_item['children'] as $child_menu_item) {
+            $menu_defs = $menu_defs . $this->format_menu_item($child_menu_item);
+          }
+        }
+      }
+      $this->request->data['Content']['__menu'] = rtrim($menu_defs, '; ');
     }
     else if($this->request->is('put')) {
       if($this->Content->save($this->request->data)) {
