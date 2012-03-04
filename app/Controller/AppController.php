@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
   public $components = array(
-    'Menu',
+    'MenuDisplay',
     'Session',
     'Auth' => array(
       'logoutRedirect' => array('controller' => 'contents', 'action' => 'display', 'home')           
