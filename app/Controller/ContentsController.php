@@ -80,9 +80,7 @@ class ContentsController extends AppController {
         $this->Content->Menu->deleteAll(array('Menu.content_id' => $this->Content->id));
 
         $menu_map = array();
-        $existing_menu_items = $this->Content->Menu->find('all', array(
-          'conditions' => array('Menu.parent_id' => null)
-        ));
+        $existing_menu_items = $this->Content->Menu->find('all');
         foreach($existing_menu_items as $menu_item) {
           $menu_id = $menu_item['Menu']['menu_id'];
           $title = $menu_item['Menu']['title'];
@@ -134,8 +132,12 @@ class ContentsController extends AppController {
               $menu['Menu']['parent_id'] = $parent_id;
               $menu['Menu']['title'] = $title;
             }
+            $key = $this->menu_map_key($menu_id, $title, $parent_id);
+            if(array_key_exists($key, $menu_map)) {
+              $menu['Menu']['id'] = $menu_map[$key];  
+            }
             $this->Content->Menu->save($menu);
-            $menu_map[$this->menu_map_key($menu_id, $title, $parent_id)] = $this->Content->Menu->id;
+            $menu_map[$key] = $this->Content->Menu->id;
             unset($this->Content->Menu->id);
           }
         }
