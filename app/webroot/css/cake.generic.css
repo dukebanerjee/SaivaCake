@@ -811,6 +811,41 @@ form.login input {
   float: left;
 }
 
+#bottom {
+  float: left;
+  clear: both;
+}
+
+#bottom-gutter-left {
+  width: 7px;
+  height: 52px;
+  padding: 0;
+  margin: 0;
+  background-image: url('../img/tab-left.jpg');
+  background-repeat: no-repeat;
+  float: left;
+}
+
+#bottom-gutter-right {
+  width: 7px;
+  height: 52px;
+  padding: 0;
+  margin: 0;
+  background-image: url('../img/tab-right.jpg');
+  background-repeat: no-repeat;
+  float: left;
+}
+
+#bottom-center {
+  width: 966px;
+  height: 52px;
+  padding: 0;
+  margin: 0;
+  background-image: url('../img/tab-center.jpg');
+  background-repeat: repeat-x;
+  float: left;
+}
+
 /** Menus **/
 
 ul.menu, ul.menu li {

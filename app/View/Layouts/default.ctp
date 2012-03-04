@@ -60,6 +60,12 @@
         <div id="top-gutter-right"></div>
       </div>
       <div id="top-bottom-separator"></div>
+      <div id="bottom">
+        <div id="bottom-gutter-left"></div>
+        <div id="bottom-center">  
+        </div>
+        <div id="bottom-gutter-right"></div>
+      </div>
 		</div>
 		<div id="content">
       <a id="main-content"></a>
