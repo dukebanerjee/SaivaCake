@@ -169,8 +169,8 @@ class Menu extends AppModel {
           $this->alias . '.content_id' => null),
         array(
           $this->alias . '.id' => $ids_with_children,
-          $this->alias . '.id' => $ids_to_delete
-        ));
+          $this->alias . '.id' => $ids_to_delete)
+      );
     }
   }
 }
