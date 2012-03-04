@@ -43,7 +43,7 @@
         <div id="top-gutter-left"></div>
         <div id="top-center">  
           <div id="menu-destinations">
-            <?php echo $this->element('menu', array("menu_id" => "destinations")); ?>
+            <?php echo $this->element('menu', array("menu_id" => "destinations", "class" => "navigation")); ?>
             <ul class="menu navigation">
             <?php if($this->Session->check('Auth.User')) { ?>
             <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>

@@ -2,7 +2,7 @@
   if(array_key_exists($menu_id, $menus)) {  
     $menu_items = $menus[$menu_id];  
 ?>
-<ul class="menu navigation">
+<ul class="menu <?php if(isset($class)) { echo $class; } ?>">
 <?php foreach($menu_items as $menu_item) { ?>
   <li>
   <?php echo $this->Html->link(
