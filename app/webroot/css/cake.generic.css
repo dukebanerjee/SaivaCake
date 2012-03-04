@@ -846,6 +846,14 @@ form.login input {
   float: left;
 }
 
+#highlighted {
+  height: 93;
+}
+
+#highlighted img {
+  float: left;
+}
+
 /** Menus **/
 
 ul.menu, ul.menu li {
@@ -1037,6 +1045,39 @@ ul.main-menu li ul span {
 #login-panel div#reset-link a:hover {
   color: #636363;
   text-decoration: underline;
+}
+
+/** Search panel **/
+
+#search-panel, 
+#search-panel form, 
+#search-panel div, 
+#search-panel input {
+  float: left;
+  display: inline;
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  clear: none;
+}
+
+#search-panel {
+  width: 250px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+#search-panel div.input input {
+  width: 170px;
+}
+
+#search-panel div.submit input {
+  padding: 3px;
+}
+
+#search-panel div.submit {
+  margin-left: 10px;
 }
 
 /** Miscellanous **/

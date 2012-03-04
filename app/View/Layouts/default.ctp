@@ -1,21 +1,3 @@
-<?php
-/**
- *
- * PHP 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       Cake.View.Layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -66,6 +48,19 @@
             <?php echo $this->element('menu', array("menu_id" => "main", "class" => "main-menu")); ?>
         </div>
         <div id="bottom-gutter-right"></div>
+      </div>
+      <div id="highlighted">
+        <?php echo $this->Html->image('joinnow.jpg', array('alt' => 'Join SAIVA', 'border' => '0')) ?>
+        <div id="search-panel">
+          <?php
+            echo $this->Form->create('User', array(
+              'class' => 'basic search',
+              'url' => array('controller' => 'contents', 'action' => 'search')
+            ));
+            echo $this->Form->input('__search', array('label' => false, 'size' => 15, 'value' => 'Search'));
+            echo $this->Form->end(array('label' => 'Go'));
+          ?>
+        </div>
       </div>
 		</div>
 		<div id="content">
