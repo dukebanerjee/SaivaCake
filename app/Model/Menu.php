@@ -47,6 +47,8 @@ class Menu extends AppModel {
   public function update_menu_definition($content_id, $all_menu_defs) {
     $menu_map = array();
     $ids_to_delete = array(); 
+
+    // Construct a map of existing menu items so we don't recreate menu items that already exist
     $existing_menu_items = $this->find('all');
     foreach($existing_menu_items as $menu_item) {
       $menu_id = $menu_item[$this->alias]['menu_id'];
@@ -54,21 +56,25 @@ class Menu extends AppModel {
       $parent_id = $menu_item[$this->alias]['parent_id'];
       $menu_map[$this->menu_map_key($menu_id, $title, $parent_id)] = $menu_item[$this->alias]['id'];
 
+      // Also keep track of all menu items that belongs to $content_id, in case we have to delete them
       if($menu_item[$this->alias]['content_id'] == $content_id) {
         $ids_to_delete[$menu_item[$this->alias]['id']] = true;
       }
     }
 
-    // menu definition is: <menu-id>|{<title> or <title>|<subtitle>}[index]
+    // Menu definition is: <menu-id>|{<title> or <title>|<subtitle>}[index]
     $menu_def_count = preg_match_all('/' .
       '\s*([^|;\[\]]*)\s*' .            // menu ID
       '\|' .                            // separator
-      '\s*([^|;\[\]]*)\s*' .            // menu item name
-      '(?:\|\s*([^|;\[\]]*)\s*)?' .     // optional second level
-      '(?:\[\s*([0-9]*)\s*\])?\s*;?' .  // optional index
+      '\s*([^|;\[\]]*)\s*' .            // title
+      '(?:\|\s*([^|;\[\]]*)\s*)?' .     // subtitle (optional)
+      '(?:\[\s*([0-9]*)\s*\])?\s*;?' .  // index (optional)
       '/', $all_menu_defs, $matches);
+    // Parse the menu definitions (if valid or not empty), creating or updating menu definitions in
+    // the database.
     if($menu_def_count) {
       for($i = 0; $i < $menu_def_count; $i++) {
+        // Create basic menu definition from menu definition string        
         $menu_id = $matches[1][$i];
         $index = $matches[4][$i];
         $title = $matches[2][$i];
@@ -85,7 +91,10 @@ class Menu extends AppModel {
           'content_id' => $content_id
         ));
 
+        // If the menu definition string has a subtitle, then it is a child menu definition and we 
+        // will have to deal with the parent menu definition.
         if(!empty($subtitle)) {
+          // Create the parent menu definition if it does not already exist
           $parent_key = $this->menu_map_key($menu_id, $title, null);
           if(!array_key_exists($parent_key, $menu_map)) {
             $parent_menu = array($this->alias => array(
@@ -97,6 +106,7 @@ class Menu extends AppModel {
               'parent_id' => null));
             $this->save($parent_menu);
             $menu_map[$parent_key] = $this->id;
+            // Back to insert mode
             unset($this->id);
           }
           $parent_id = $menu_map[$parent_key];
@@ -105,23 +115,34 @@ class Menu extends AppModel {
           $menu[$this->alias]['title'] = $title;
         }
 
+        // Create the menu definition, or update it if it already exists
         $key = $this->menu_map_key($menu_id, $title, $parent_id);
         if(array_key_exists($key, $menu_map)) {
+          // Switch to update mode
           $this->id = $menu_map[$key];  
         }
         $this->save($menu);
         $menu_map[$key] = $this->id;
+        // Remove this menu definition from consideration of deletion, it's configuration is still
+        // in the menu definition string
         unset($ids_to_delete[$this->id]);
+        // Back to insert mode
         unset($this->id);
       }
     }
-    $ids_to_delete = array_keys($ids_to_delete);
+
+    // Now, remove menu definitions that exist in the database but no longer in the menu definition string
     if(!empty($ids_to_delete)) {
+      // Flatten the map so it is now a true array
+      $ids_to_delete = array_keys($ids_to_delete);
+
+      // Child menu definitions are always safe to delete
       $this->deleteAll(array(
         $this->alias . '.id' => $ids_to_delete, 
         $this->alias . '.parent_id !=' => null), 
         false, false);
   
+      // We can't delete parent menu definitions that still have child menu definitions.
       $menu_ids_with_children = $this->find('all', array(
         'fields' => array('parent_id'),
         'conditions' => array(
@@ -134,11 +155,13 @@ class Menu extends AppModel {
       }
       $ids_with_children[] = 0;
 
+      // Delete the parent menu definitions that belong to content_id that have no child menu definitions
       $this->deleteAll(array(
         'NOT' => array($this->alias . '.id' => $ids_with_children),
         $this->alias . '.id' => $ids_to_delete    
       ), false, false);
 
+      // Disown parent menu definitions that belong to content_id but still have child menu definitions
       $this->updateAll(array(
           $this->alias . '.controller' => "'contents'",
           $this->alias . '.action' => "'display'",
