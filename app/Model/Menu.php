@@ -24,7 +24,7 @@ class Menu extends AppModel {
     return $menu_def . '; ';
   }
 
-  public function get_menu_definition($content_id) {
+  public function format_menu_definition($content_id) {
     $menu_items = $this->find('threaded', array(
         'conditions' => array('Menu.content_id' => $content_id)
     ));

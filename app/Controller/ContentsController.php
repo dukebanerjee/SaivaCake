@@ -68,7 +68,7 @@ class ContentsController extends AppController {
       if(!$this->request->data) {
         throw new NotFoundException();
       }
-      $this->request->data['Content']['__menu'] = $this->Content->Menu->get_menu_definition($id);
+      $this->request->data['Content']['__menu'] = $this->Content->Menu->format_menu_definition($id);
     }
     else if($this->request->is('put')) {
       if($this->Content->save($this->request->data)) {
