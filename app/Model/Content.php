@@ -9,11 +9,5 @@ class Content extends AppModel {
       'fields' => array('username') 
     )
   );
-
-  public $hasMany = array(
-    'Menu' => array(
-      'fields' => array('menu_id', 'title', 'index', 'parent_id')
-    )
-  );
 }
 ?>

@@ -50,6 +50,9 @@ class ContentsController extends AppController {
       $this->request->data['Content']['status'] = 'published';
       $this->request->data['Content']['type'] = 'contents';
       $this->request->data['Content']['author_id'] = $this->Auth->user('id');
+
+      $this->loadModel('Menu');
+      $this->Menu->update_menu_definition($id, $this->request->data['Content']['__menu']);
     
       if($this->Content->save($this->request->data)) {
         $this->Session->setFlash('Content has been added.');
@@ -62,18 +65,20 @@ class ContentsController extends AppController {
   }
 
   public function edit($id) {
+    $this->loadModel('Menu');
+
     $this->Content->id = $id;
     if($this->request->is('get')) {
       $this->request->data = $this->Content->read();
       if(!$this->request->data) {
         throw new NotFoundException();
       }
-      $this->request->data['Content']['__menu'] = $this->Content->Menu->format_menu_definition($id);
+      $this->request->data['Content']['__menu'] = $this->Menu->format_menu_definition($id);
     }
     else if($this->request->is('put')) {
       if($this->Content->save($this->request->data)) {
         $this->Session->setFlash('Content has been updated.');
-        $this->Content->Menu->update_menu_definition($id, $this->request->data['Content']['__menu']);
+        $this->Menu->update_menu_definition($id, $this->request->data['Content']['__menu']);
         $this->redirect(array('action' => 'index'));
       }
       else {
