@@ -80,6 +80,15 @@ class ContentsController extends AppController {
         $this->Content->Menu->deleteAll(array('Menu.content_id' => $this->Content->id));
 
         $menu_map = array();
+        $existing_menu_items = $this->Content->Menu->find('all', array(
+          'conditions' => array('Menu.parent_id' => null)
+        ));
+        foreach($existing_menu_items as $menu_item) {
+          $menu_id = $menu_item['Menu']['menu_id'];
+          $title = $menu_item['Menu']['title'];
+          $menu_map[$this->menu_map_key($menu_id, $title, null)] = $menu_item['Menu']['id'];          
+        }
+
         $all_menu_defs = $this->request->data['Content']['__menu'];
         $menu_def_count = preg_match_all('/' .
           '\s*([^|;\[\]]*)\s*' .            // menu ID
@@ -131,6 +140,7 @@ class ContentsController extends AppController {
           }
         }
 
+        $this->Session->setFlash('Content updated.');
         //$this->redirect(array('action' => 'index'));
       }
       else {
