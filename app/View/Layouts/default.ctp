@@ -45,7 +45,9 @@
         <div id="menu-destinations">
           <?php echo $this->element('menu', array("menu_id" => "destinations")); ?>
           <ul class="menu navigation">
+          <?php if($this->Session->check('Auth.User')) { ?>
           <li><a href="#">Logout</a></li>
+          <?php } ?>
           <li><a href="#" class="active">Welcome <?php $user = $this->Session->read('Auth.User'); echo $user['first_name'] ?> </a></li>
           </ul>
         </div>
