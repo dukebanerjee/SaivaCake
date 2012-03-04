@@ -74,7 +74,7 @@ class ContentsController extends AppController {
       if($this->Content->save($this->request->data)) {
         $this->Session->setFlash('Content has been updated.');
         $this->Content->Menu->update_menu_definition($id, $this->request->data['Content']['__menu']);
-        //$this->redirect(array('action' => 'index'));
+        $this->redirect(array('action' => 'index'));
       }
       else {
         $this->Session->setFlash('Content could not be updated.');
