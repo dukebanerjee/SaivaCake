@@ -765,7 +765,7 @@ form.login input {
 }
 
 #top-gutter-right {
-  width: 3px;
+  width: 4px;
   height: 93px;
   padding: 0;
   margin: 0;
@@ -799,6 +799,16 @@ form.login input {
   font-size: 16px;
   font-weight: 600;
   padding-top: 5px;
+}
+
+#top-bottom-separator {
+  width: 980px;
+  height: 7px;
+  padding: 0;
+  margin: 0;
+  background-image: url('../img/top-bottom.jpg');
+  background-repeat: no-repeat;
+  float: left;
 }
 
 /** Menus **/
@@ -851,6 +861,7 @@ ul.menu li {
   float: right;
   clear: right;
   width: 430px;
+  height: 45px;
 }
 
 #login-panel div,

@@ -1,7 +1,7 @@
+<div id="login-panel">
 <?php
 if(!$this->Session->check('Auth.User')) {
 ?>
-<div id="login-panel">
 <?php
   echo $this->Form->create('User', array(
     'class' => 'basic login',
@@ -19,5 +19,5 @@ if(!$this->Session->check('Auth.User')) {
   );
 ?>
 </div>
-</div>
 <? } ?>
+</div>

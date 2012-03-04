@@ -39,24 +39,27 @@
   </div>
 	<div id="container">
 		<div id="header">
-      <div id="top-gutter-left"></div>
-      <div id="top-center">  
-        <div id="menu-destinations">
-          <?php echo $this->element('menu', array("menu_id" => "destinations")); ?>
-          <ul class="menu navigation">
-          <?php if($this->Session->check('Auth.User')) { ?>
-          <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
-          <?php } ?>
-          <li><a href="#" class="active">Welcome <?php $user = $this->Session->read('Auth.User'); echo $user['first_name'] ?> </a></li>
-          </ul>
+      <div id="top">
+        <div id="top-gutter-left"></div>
+        <div id="top-center">  
+          <div id="menu-destinations">
+            <?php echo $this->element('menu', array("menu_id" => "destinations")); ?>
+            <ul class="menu navigation">
+            <?php if($this->Session->check('Auth.User')) { ?>
+            <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
+            <?php } ?>
+            <li><a href="#" class="active">Welcome <?php $user = $this->Session->read('Auth.User'); echo $user['first_name'] ?> </a></li>
+            </ul>
+          </div>
+          <?php echo $this->element('login_panel'); ?>
+          <div id="logo">
+            <?php echo $this->Html->image('logo.jpg', array('alt' => 'SAIVA', 'border' => '0')) ?>
+            <div>Promote friendship, education and well-being through volunteering</div>
+          </div>
         </div>
-        <?php echo $this->element('login_panel'); ?>
-        <div id="logo">
-          <?php echo $this->Html->image('logo.jpg', array('alt' => 'SAIVA', 'border' => '0')) ?>
-          <div>Promote friendship, education and well-being through volunteering</div>
-        </div>
+        <div id="top-gutter-right"></div>
       </div>
-      <div id="top-gutter-right"></div>
+      <div id="top-bottom-separator"></div>
 		</div>
 		<div id="content">
       <a id="main-content"></a>
