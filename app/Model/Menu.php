@@ -45,14 +45,13 @@ class Menu extends AppModel {
   }
 
   public function update_menu_definition($content_id, $all_menu_defs) {
-    $this->deleteAll(array($this->alias . '.content_id' => $content_id));
-
     $menu_map = array();
     $existing_menu_items = $this->find('all');
     foreach($existing_menu_items as $menu_item) {
       $menu_id = $menu_item[$this->alias]['menu_id'];
       $title = $menu_item[$this->alias]['title'];
-      $menu_map[$this->menu_map_key($menu_id, $title, null)] = $menu_item[$this->alias]['id'];          
+      $parent_id = $menu_item[$this->alias]['parent_id'];
+      $menu_map[$this->menu_map_key($menu_id, $title, $parent_id)] = $menu_item[$this->alias]['id'];          
     }
 
     $menu_def_count = preg_match_all('/' .
@@ -96,12 +95,12 @@ class Menu extends AppModel {
           }
           $parent_id = $menu_map[$parent_key];
           $title = $subtitle;
-          $menu['Menu']['parent_id'] = $parent_id;
-          $menu['Menu']['title'] = $title;
+          $menu[$this->alias]['parent_id'] = $parent_id;
+          $menu[$this->alias]['title'] = $title;
         }
         $key = $this->menu_map_key($menu_id, $title, $parent_id);
         if(array_key_exists($key, $menu_map)) {
-          $menu['Menu']['id'] = $menu_map[$key];  
+          $this->id = $menu_map[$key];  
         }
         $this->save($menu);
         $menu_map[$key] = $this->id;
