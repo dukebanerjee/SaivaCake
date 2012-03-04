@@ -854,6 +854,34 @@ form.login input {
   float: left;
 }
 
+#columns-top {
+  width: 980px;
+  height: 6px;  
+  background-image: url('../img/box1-top.jpg');
+  background-repeat: no-repeat;  
+  float: left;  
+}
+
+#columns {
+  width: 980px;
+  background-image: url('../img/box1-center.jpg');
+  background-repeat: repeat-y;  
+  float: left;  
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 0;
+  padding-bottom: 5px;
+
+  color:#4A4A4A;
+  font-family:Arial, Verdana, Helvetica, sans-serif;
+  font-size:13px;
+  line-height:18px;
+}
+
+#content {
+  float: left;
+}
+
 /** Menus **/
 
 ul.menu, ul.menu li {

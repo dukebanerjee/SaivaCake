@@ -63,12 +63,15 @@
         </div>
       </div>
 		</div>
-		<div id="content">
-      <a id="main-content"></a>
-			<?php echo $this->Session->flash(); ?>
+    <div id="columns-top"></div>
+    <div id="columns">
+		  <div id="content">
+        <a id="main-content"></a>
+			  <?php echo $this->Session->flash(); ?>
 
-			<?php echo $this->fetch('content'); ?>
-		</div>
+			  <?php echo $this->fetch('content'); ?>
+		  </div>
+    </div>
 		<div id="footer">
 		</div>
 	</div>
