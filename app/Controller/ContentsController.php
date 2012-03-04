@@ -65,24 +65,6 @@ class ContentsController extends AppController {
     return $menu_id . '|' . $title . '|' . $parent_id;
   }
 
-  public function get_menu_definition() {
-    $menu_items = $this->Content->Menu->find('threaded', array(
-        'conditions' => array('Menu.content_id' => $this->Content->id)
-    ));
-    $menu_defs = '';
-    foreach($menu_items as $menu_item) {
-      if($menu_item['Menu']['content_id'] == $this->Content->id) {
-        $this->Content->Menu->set($menu_item);
-        $menu_defs = $menu_defs . $this->Content->Menu->format_menu_item();
-        foreach($menu_item['children'] as $child_menu_item) {
-          $this->Content->Menu->set($menu_item);
-          $menu_defs = $menu_defs . $this->Content->Menu->format_menu_item();
-        }
-      }
-    }
-    return rtrim($menu_defs, '; ');
-  }
-
   public function edit($id) {
     $this->Content->id = $id;
     if($this->request->is('get')) {
@@ -90,7 +72,7 @@ class ContentsController extends AppController {
       if(!$this->request->data) {
         throw new NotFoundException();
       }
-      $this->request->data['Content']['__menu'] = $this->get_menu_definition();
+      $this->request->data['Content']['__menu'] = $this->Content->Menu->get_menu_definition($id);
     }
     else if($this->request->is('put')) {
       if($this->Content->save($this->request->data)) {
