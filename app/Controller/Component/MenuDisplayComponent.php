@@ -2,10 +2,8 @@
 class MenuDisplayComponent extends Component {
   public function beforeRender($controller) {
     $controller->loadModel('Menu');
-    $menus = $controller->Menu->find('all', array(
-      'conditions' => array('Menu.parent_id' => null),
-      'order' => array('Menu.menu_id', 'Menu.index'),
-      'recursive' => 1
+    $menus = $controller->Menu->find('threaded', array(
+      'order' => array('Menu.menu_id', 'Menu.index')
     ));
     
     $all_menu_links = array();

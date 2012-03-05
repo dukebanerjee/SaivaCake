@@ -57,11 +57,10 @@ class ContentsController extends AppController {
       $this->request->data['Content']['type'] = 'Content';
       $this->request->data['Content']['author_id'] = $this->Auth->user('id');
 
-      $this->loadModel('Menu');
-      $this->Menu->update_menu_definition($id, $this->request->data['Content']['__menu']);
-    
       if($this->Content->save($this->request->data)) {
         $this->Session->setFlash('Content has been added.');
+        $this->loadModel('Menu');
+        $this->Menu->update_menu_definition($this->Content->id, $this->request->data['Content']['__menu']);
         $this->redirect(array('action' => 'index'));
       }
       else {
