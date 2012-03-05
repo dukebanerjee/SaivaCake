@@ -54,7 +54,7 @@ class ContentsController extends AppController {
   public function add() {
     if($this->request->is('post')) {
       $this->request->data['Content']['status'] = 'published';
-      $this->request->data['Content']['type'] = 'contents';
+      $this->request->data['Content']['type'] = 'Content';
       $this->request->data['Content']['author_id'] = $this->Auth->user('id');
 
       $this->loadModel('Menu');
