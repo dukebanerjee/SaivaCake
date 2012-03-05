@@ -19,10 +19,10 @@ class MenuDisplayComponent extends Component {
       $menu_links = &$all_menu_links[$menu_id];
 
       if($menu['Menu']['index'] == null) {
-        $menu_links['unordered'][] = $menu['Menu'];
+        $menu_links['unordered'][] = $menu;
       }
       else {
-        $menu_links['ordered'][] = $menu['Menu'];
+        $menu_links['ordered'][] = $menu;
       }
     }
 

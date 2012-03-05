@@ -6,11 +6,11 @@
 <?php $first = true; foreach($menu_items as $menu_item) { ?>
   <li class="<?php if($first) { echo 'first'; $first = false; } ?>">
   <?php echo $this->Html->link(
-    $this->Html->tag('span', $menu_item['title']), array(
-        'controller' => $menu_item['controller'], 
-        'action' => $menu_item['action'], 
-        $menu_item['parameter'],
-        '?' => array('mid' => $menu_item['id'])),
+    $this->Html->tag('span', $menu_item['Menu']['title']), array(
+        'controller' => $menu_item['Menu']['controller'], 
+        'action' => $menu_item['Menu']['action'], 
+        $menu_item['Menu']['parameter'],
+        '?' => array('mid' => $menu_item['Menu']['id'])),
       array('escape' => false)
   ); ?>
   </li>
