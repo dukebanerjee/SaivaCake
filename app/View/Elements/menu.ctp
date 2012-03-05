@@ -1,4 +1,5 @@
 <?php
+  // Gather the context of the current page
   $params = $this->request->params;
   $controller = $params['controller'];
   $action = $params['action'];
@@ -23,7 +24,8 @@
           $child_list_items = '';
           $first_child = true;
           foreach($menu_item['children'] as $child_menu_item) { 
-            // Set the class for the child menu item. It can be active if the current page is shown.
+            // Set the class for the child menu item. It is be active if it matches the context 
+            // of the current page.
             $active = $controller == $child_menu_item['Menu']['controller'] &&
                     $action == $child_menu_item['Menu']['action'] &&
                     $parameter == $child_menu_item['Menu']['parameter'];
@@ -62,8 +64,8 @@
           $child_menu = $this->Html->tag('ul', $child_list_items, array('class' => 'menu', 'escape' => false));
         }
 
-        // Set the class for the parent menu item. It can be active if the current page is shown
-        // and "active parent" if any of its children is the current page shown.
+        // Set the class for the parent menu item. It is active if it matches the context of the 
+        // current page and "active parent" if any of its children is the current page shown.
         $active = $controller == $menu_item['Menu']['controller'] &&
             $action == $menu_item['Menu']['action'] &&
             $parameter == $menu_item['Menu']['parameter'];
