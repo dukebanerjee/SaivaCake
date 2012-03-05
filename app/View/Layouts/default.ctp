@@ -25,7 +25,7 @@
         <div id="top-gutter-left"></div>
         <div id="top-center">  
           <div id="menu-destinations">
-            <?php echo $this->element('menu', array("menu_id" => "destinations", "class" => "navigation")); ?>
+            <?php echo $this->element('menu', array("menu_id" => "destinations", "class" => "navigation", "show_children" => false)); ?>
             <ul class="menu navigation">
             <?php if($this->Session->check('Auth.User')) { ?>
             <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
@@ -45,7 +45,7 @@
       <div id="bottom">
         <div id="bottom-gutter-left"></div>
         <div id="bottom-center">
-            <?php echo $this->element('menu', array("menu_id" => "main", "class" => "main-menu")); ?>
+            <?php echo $this->element('menu', array("menu_id" => "main", "class" => "main-menu", "show_children" => true)); ?>
         </div>
         <div id="bottom-gutter-right"></div>
       </div>
@@ -76,7 +76,7 @@
         <div id="quicklinks-center">
           <div id="menu-quicklinks">
             <h2>Quick Links</h2>
-            <?php echo $this->element('menu', array("menu_id" => "quicklinks", "class" => "navigation")); ?>
+            <?php echo $this->element('menu', array("menu_id" => "quicklinks", "class" => "navigation", "show_children" => false)); ?>
           </div>
         </div>
         <div id="quicklinks-gutter-right"></div>
