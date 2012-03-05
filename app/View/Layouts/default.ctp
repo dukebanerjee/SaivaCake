@@ -15,7 +15,7 @@
 		echo $this->fetch('script');
 	?>
 </head>
-<body id="<?php if(isset($id)) { echo $id; } ?>">
+<body id="<?php if(isset($id)) { echo $id; } ?>" class="<?php if(isset($id) && $id != 'home') { echo 'not-home'; } ?>">
   <div id="skip-link">
     <a href="#main-content">Skip to main content</a>
   </div>

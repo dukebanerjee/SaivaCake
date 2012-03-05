@@ -1223,6 +1223,20 @@ ul.main-menu li ul span {
   text-indent: -1000px;
 }
 
+h1.title {
+  font-family: Arial, Verdana, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 100;
+  color: #2f9cf7;
+  background-image: url('../img/header-background.jpg');
+  background-repeat: no-repeat;
+  padding-bottom: 12px;
+}
+
 #home h1.title {
   display: none;
+}
+
+.not-home #content {
+  width: 910px;
 }
