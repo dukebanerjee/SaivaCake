@@ -1073,15 +1073,15 @@ ul.main-menu span {
   padding-left: 19px;
 }
 
-ul.main-menu > ul.menu > li.first a.active,
-ul.main-menu a.active-trail,
+ul.main-menu > li a.active,
+ul.main-menu a.active-parent,
 ul.main-menu a:hover {
   color: #ff0000;
   background: transparent url('../img/button-right.jpg') no-repeat scroll top right;
 }
 
-ul.main-menu > ul.menu > li.first a.active span,
-ul.main-menu a.active-trail span,
+ul.main-menu > li a.active span,
+ul.main-menu a.active-parent span,
 ul.main-menu a:hover span {
   background: transparent url('../img/button-left.jpg') no-repeat;
 }
