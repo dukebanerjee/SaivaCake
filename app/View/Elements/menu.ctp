@@ -9,7 +9,8 @@
     $this->Html->tag('span', $menu_item['title']), array(
         'controller' => $menu_item['controller'], 
         'action' => $menu_item['action'], 
-        $menu_item['parameter']),
+        $menu_item['parameter'],
+        '?' => array('mid' => $menu_item['id'])),
       array('escape' => false)
   ); ?>
   </li>
