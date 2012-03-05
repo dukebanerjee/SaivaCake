@@ -4,7 +4,8 @@ class MenuDisplayComponent extends Component {
     $controller->loadModel('Menu');
     $menus = $controller->Menu->find('all', array(
       'conditions' => array('Menu.parent_id' => null),
-      'order' => array('Menu.menu_id', 'Menu.index')
+      'order' => array('Menu.menu_id', 'Menu.index'),
+      'recursive' => 1
     ));
     
     $all_menu_links = array();
