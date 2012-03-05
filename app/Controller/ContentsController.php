@@ -19,6 +19,7 @@ class ContentsController extends AppController {
     $content = $this->Content->findByIdOrAlias($id, $id);
     if($content) {
       $this->set('title_for_layout', $content['Content']['title']);
+      $this->set('id', empty($content['Content']['alias']) ? $content['Content']['id'] : $content['Content']['alias']);
       $this->set('content', $content);
       $this->render($content['Content']['type'] . '/display');
     }

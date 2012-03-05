@@ -1222,3 +1222,7 @@ ul.main-menu li ul span {
   height: 0;
   text-indent: -1000px;
 }
+
+#home h1.title {
+  display: none;
+}
