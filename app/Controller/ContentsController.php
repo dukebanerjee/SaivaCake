@@ -15,49 +15,17 @@ class ContentsController extends AppController {
     $this->Auth->allow('display');
   }
 
-  public function replace_token($match) {
-    return $match[0];
-  }
-
-  public function replace_tokens($original) {
-    $view = new View($this);
-    $html = $view->loadHelper('Html');
-
-    $replacement = '';
-    $last_offset = 0;    
-    $count = preg_match_all('/\$\{\s*([^}:]+)\s*:\s*([^}:]*)\s*\}/', $original, $matches, PREG_OFFSET_CAPTURE);
-    if($count) {
-      for($i = 0; $i < $count; $i++) {
-        $token = $matches[0][$i][0];
-        $token_offset = $matches[0][$i][1];
-        $token_type = $matches[1][$i][0];
-        $token_value = $matches[2][$i][0];
-
-        $replacement .= substr($original, $last_offset, $token_offset - $last_offset);
-        $token_replacement = '';
-        if($token_type == 'img') {
-            $img = $html->image($token_value);
-            if(preg_match('/src="([^"]*)"/', $img, $img_match)) {
-              $token_replacement = $img_match[1];
-            }
-        }
-        $replacement .= $token_replacement;
-        $last_offset = $token_offset + strlen($token);
-      }
-    }
-    $replacement .= substr($original, $last_offset);
-
-    return $replacement;
-  }
-
   public function display($id = 'home') {
     $content = $this->Content->findByIdOrAlias($id, $id);
     if($content) {
-      $content['Content']['content'] = $this->replace_tokens($content['Content']['content']);
+      $view = new View($this);
+      $html = $view->loadHelper('Html');
+      $this->Content->set($content);
+      $this->Content->replace_tokens($html);
 
       $this->set('title_for_layout', $content['Content']['title']);
       $this->set('id', empty($content['Content']['alias']) ? $content['Content']['id'] : $content['Content']['alias']);
-      $this->set('content', $content);
+      $this->set('content', $this->Content->data);
       $this->render($content['Content']['type'] . '/display');
     }
     else if($id == 'home') {
