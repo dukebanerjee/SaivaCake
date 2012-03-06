@@ -10,7 +10,7 @@
     $menu_items = $menus[$menu_id];  
     if(!empty($menu_items)) {
 
-      // Generate each menu item as <li><span><link></span>{child menu}</li>
+      // Generate each menu item
       $list_items = '';
       $first = true;
       foreach($menu_items as $menu_item) {
@@ -20,7 +20,7 @@
         $child_menu = '';
         if($show_children && !empty($menu_item['children'])) {
 
-          // Generate each child menu item as <li><span><link></span></li>
+          // Generate each child menu item
           $child_list_items = '';
           $first_child = true;
           foreach($menu_item['children'] as $child_menu_item) { 
@@ -40,7 +40,7 @@
             // If the child is active, then the parent will be "active parent"
             if($active) $active_parent = true;
 
-            // Generate the child menu item
+            // Generate each child menu item as <li><span><link></span></li>
             $child_list_items .= $this->Html->tag('li',
               $this->Html->link(
                 $this->Html->tag('span', $child_menu_item['Menu']['title']), 
@@ -80,7 +80,7 @@
           $menu_class .= ' first';
         }
 
-        // Generate the parent menu item
+        // Generate each menu item as <li><span><link></span>{child menu}</li>
         $list_items .= $this->Html->tag('li',
           $this->Html->link(
             $this->Html->tag('span', $menu_item['Menu']['title']), 
