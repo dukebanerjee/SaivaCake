@@ -1,4 +1,4 @@
-<h1><?php echo $this->fetch('title'); ?></h1>
+<h1 class="title"><?php echo $this->fetch('title'); ?></h1>
 <?php
 echo $this->Form->create('Content', array(
   'class' => 'basic',
