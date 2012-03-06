@@ -1,4 +1,4 @@
-<h1>Content</h1>
+<h1 class="title">Contents</h1>
 <div>
   <?php echo $this->Html->link('Add Content', 
     array('controller' => 'contents', 'action' => 'add')); ?>
