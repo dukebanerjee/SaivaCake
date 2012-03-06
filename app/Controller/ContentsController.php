@@ -37,8 +37,17 @@ class ContentsController extends AppController {
   }
 
   public function index() {
+    $content_types = array();
+    foreach($this->Content->content_types() as $content_type) {
+      $content_types[$content_type] = $content_type;
+    }
+
     $data = $this->paginate();
     $this->set('contents', $data);
+    $this->set('content_type_options', $content_types);
+  }
+
+  public function set_content_type_options() {
   }
 
   public function delete($id = null) {

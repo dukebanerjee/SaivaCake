@@ -1215,6 +1215,21 @@ ul.main-menu li ul span {
   margin-left: 10px;
 }
 
+/** Add content form **/
+
+#add-content-form div.input,
+#add-content-form div.submit {
+  float: left;
+  clear: none;
+  margin: 0;
+  padding: 0;
+  margin-right: 15px;
+}
+
+#add-content-form form {
+  float: left;
+}
+
 /** Miscellanous **/
 
 #skip-link {

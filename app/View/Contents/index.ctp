@@ -1,7 +1,23 @@
 <h1 class="title">Contents</h1>
-<div>
-  <?php echo $this->Html->link('Add Content', 
-    array('controller' => 'contents', 'action' => 'add')); ?>
+<div id="add-content-form">
+  <?php 
+    echo $this->Form->create('Content', array(
+      'type' => 'GET',
+      'action' => 'add',
+      'class' => 'basic',
+      'inputDefaults' => array(
+        'style' => 'width: 15em',
+        'label' => array(
+          'style' => 'width: 10em'
+        )
+      )
+    ));
+    echo $this->Form->input('type', array(
+      'label' => array('text' => 'Add Content', 'style' => 'width: 6em'),
+      'options' => $content_type_options
+    ));
+    echo $this->Form->end('Add');
+  ?>
 </div>
 <table>
   <thead>

@@ -10,6 +10,10 @@ class Content extends AppModel {
     )
   );
 
+  public static function content_types() {
+    return array('Content', 'Event');
+  }
+
   public function replace_tokens($html) {
     $original = $this->data[$this->alias]['content'];
 
