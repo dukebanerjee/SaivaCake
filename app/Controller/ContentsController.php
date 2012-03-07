@@ -15,8 +15,23 @@ class ContentsController extends AppController {
     $this->Auth->allow('display');
   }
 
+  public function get_type($id) {
+      return $this->Content->find('first', array(
+        'conditions' => array('OR' => array('Content.id' => $id, 'Content.alias' => $id)),
+        'fields' => array('type')
+      ));
+  }
+
   public function display($id = 'home') {
-    $content = $this->Content->findByIdOrAlias($id, $id);
+    $content = false;    
+    $content = $this->get_type($id);
+    if($content) {
+      $type = $content['Content']['type'];
+      $this->loadModel($type);
+      $content = $type == 'Content' ? 
+        $this->Content->findByIdOrAlias($id, $id) : 
+        $this->$type->findByContentId($id);
+    }
     if($content) {
       $view = new View($this);
       $html = $view->loadHelper('Html');
@@ -47,26 +62,52 @@ class ContentsController extends AppController {
     $this->set('content_type_options', $content_types);
   }
 
-  public function set_content_type_options() {
-  }
-
   public function delete($id = null) {
-    if($this->Content->delete($id)) {
-      $this->Session->setFlash('Content has been deleted');
+    $deleted = false;    
+    $content = $this->get_type($id);
+    if($content) {
+      if($content['Content']['type'] != 'Content') {
+        $this->Content->bindModel(
+          array('hasOne' => array(
+            $content['Content']['type'] => array(
+              'className' => $content['Content']['type'],
+              'dependent' => true
+            )
+          )
+        ), false);
+      }
+      $this->Content->bindModel(
+        array('hasOne' => array(
+          'Menu' => array(
+            'className' => 'Menu',
+            'dependent' => true
+          )
+        )
+      ), false);
+      if($this->Content->delete($id, true)) {
+        $this->Session->setFlash('Content has been deleted');
+        $deleted = true;
+      }
     }
-    else {
+    if(!$deleted) {
       $this->Session->setFlash('Content could not be deleted');
     }
     $this->redirect(array('action' => 'index'));
   }
 
   public function add() {
-    if($this->request->is('post')) {
+    if($this->request->is('get')) {
+      $model = $this->request->query['type'];
+      $this->loadModel($model);
+      $this->render($model . '/add');
+    }
+    else if($this->request->is('post')) {
       $this->request->data['Content']['status'] = 'published';
-      $this->request->data['Content']['type'] = 'Content';
       $this->request->data['Content']['author_id'] = $this->Auth->user('id');
 
-      if($this->Content->save($this->request->data)) {
+      $type = $this->request->data['Content']['type'];
+      $this->loadModel($type);
+      if($this->$type->saveAll($this->request->data)) {
         $this->Session->setFlash('Content has been added.');
         $this->loadModel('Menu');
         $this->Menu->update_menu_definition($this->Content->id, $this->request->data['Content']['__menu']);
@@ -83,14 +124,27 @@ class ContentsController extends AppController {
 
     $this->Content->id = $id;
     if($this->request->is('get')) {
-      $this->request->data = $this->Content->read();
+      $this->request->data = $this->get_type($id);
       if(!$this->request->data) {
         throw new NotFoundException();
       }
+
+      $type = $this->request->data['Content']['type'];
+      $this->loadModel($type);
+      $this->request->data = $type == 'Content' ? 
+        $this->Content->findById($id) : 
+        $this->$type->findByContentId($id);
+      if(!$this->request->data) {
+        throw new NotFoundException();
+      }
+
       $this->request->data['Content']['__menu'] = $this->Menu->format_menu_definition($id);
+      $this->render($type . '/edit');
     }
     else if($this->request->is('put')) {
-      if($this->Content->save($this->request->data)) {
+      $type = $this->request->data['Content']['type'];
+      $this->loadModel($type);
+      if($this->$type->saveAll($this->request->data)) {
         $this->Session->setFlash('Content has been updated.');
         $this->Menu->update_menu_definition($id, $this->request->data['Content']['__menu']);
         $this->redirect(array('action' => 'index'));

@@ -9,6 +9,7 @@ echo $this->Form->create('Content', array(
     )
   )
 ));
+echo $this->Form->input('type', array('type' => 'hidden', 'value' => 'Content'));
 echo $this->fetch('id');
 echo $this->Form->input('title');
 echo $this->Form->input('summary', array('rows' => 1));

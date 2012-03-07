@@ -1,5 +1,5 @@
 <?php
-$this->extend('_form'); 
+$this->extend('Content/_form'); 
 $this->assign('title', 'Update Content');
 $this->assign('submit_label', 'Update');
 $this->start('id');

@@ -710,14 +710,23 @@ pre {
 
 /** Basic form **/
 
+form.basic {
+  padding: 0;
+  margin: 0;
+}
+
 form.basic input {
   height: 100%;
   padding: 0;
 }
 
-form.basic input, label {
+form.basic div.input,
+form.basic input, 
+form.basic label, 
+form.basic textarea {
   clear: none;
   float: left;
+  padding: 0;
 }
 
 form.basic a.cancel {
@@ -880,6 +889,9 @@ form.login input {
 
 #content {
   float: left;
+  margin: 0;
+  padding: 0;
+  background: transparent;
 }
 
 #quicklinks {
@@ -1246,6 +1258,7 @@ h1.title {
   color: #2f9cf7;
   background-image: url('../img/header-background.jpg');
   background-repeat: no-repeat;
+  background-color: transparent;
   padding-bottom: 12px;
 }
 
