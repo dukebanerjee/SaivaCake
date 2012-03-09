@@ -32,9 +32,18 @@ class Content extends AppModel {
         if($token_type == 'img') {
             $img = $html->image($token_value);
             if(preg_match('/src="([^"]*)"/', $img, $img_match)) {
-              $token_replacement = $img_match[1];
+                $token_replacement = $img_match[1];
             }
         }
+	else if($token_type == 'link') {
+	    if(preg_match_all('/\s*([^:\s]*)\s*(?::\s*([^:\s]*))?\s*(?::\s*([^:\s]*))?/', $token_value, $link_matches)) {
+                $token_replacement = $html->url(array(
+		    'controller' => $link_matches[1][0],
+		    'action' => $link_matches[2][0],
+		    $link_matches[3][0]
+		));
+	    }
+	}
         $replacement .= $token_replacement;
         $last_offset = $token_offset + strlen($token);
       }
