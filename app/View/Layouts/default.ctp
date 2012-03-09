@@ -1,26 +1,24 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $title_for_layout; ?> | SAIVA
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-	?>
+  <?php echo $this->Html->charset(); ?>
+  <title>
+    <?php echo $title_for_layout; ?> | SAIVA
+  </title>
+  <?php
+    echo $this->Html->meta('icon');
+    echo $this->Html->css('cake.generic');
+    echo $this->fetch('meta');
+    echo $this->fetch('css');
+    echo $this->fetch('script');
+  ?>
 </head>
 <body id="<?php if(isset($id)) { echo $id; } ?>" class="<?php if(isset($id) && $id != 'home') { echo 'not-home'; } ?>">
   <div id="skip-link">
     <a href="#main-content">Skip to main content</a>
   </div>
-	<div id="container">
-		<div id="header">
+  <div id="container">
+    <div id="header">
       <div id="top">
         <div id="top-gutter-left"></div>
         <div id="top-center">  
@@ -62,16 +60,16 @@
           ?>
         </div>
       </div>
-		</div>
+    </div>
     <div id="columns-top"></div>
     <div id="columns">
-		  <div id="content">
+      <div id="content">
         <a id="main-content"></a>
-			  <?php echo $this->Session->flash(); ?>
+        <?php echo $this->Session->flash(); ?>
 
-			  <?php echo $this->fetch('content'); ?>
-		  </div>
-		  <div id="quicklinks">
+        <?php echo $this->fetch('content'); ?>
+      </div>
+      <div id="quicklinks">
         <div id="quicklinks-gutter-left"></div>
         <div id="quicklinks-center">
           <div id="menu-quicklinks">
@@ -80,7 +78,7 @@
           </div>
         </div>
         <div id="quicklinks-gutter-right"></div>
-		  </div>
+      </div>
       <div id="footer">
         <div id="footer-gutter-left"></div>
         <div id="footer-center">
@@ -88,9 +86,9 @@
           <div id="footer-right">Copyright &copy; 2010-2011 SAIVA. All Rights Reserved.</div>
         </div>
         <div id="footer-gutter-right"></div>
-		  </div>
+      </div>
     </div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
+  </div>
+  <?php echo $this->element('sql_dump'); ?>
 </body>
 </html>
