@@ -15,6 +15,12 @@ class EventsController extends AppController {
        array_key_exists('end', $this->request->query)) {
         $start = date('Y-m-d H:i:s', $this->request->query['start']);
         $end = date('Y-m-d H:i:s', $this->request->query['end']);
+        $this->Event->bindModel(
+          array('belongsTo' => array(
+            'Content' => array(
+              'className' => 'Content'
+            )
+          )), false);
         $event_objects = $this->Event->find('all', array(
           'conditions' => array('or' => array(
           'Event.start >=' => $start,
