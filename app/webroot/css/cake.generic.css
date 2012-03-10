@@ -963,6 +963,18 @@ form.login input {
   padding-top: 17px;
 }
 
+.link a {
+   color: #4A4A4A;
+   text-decoration: none;
+}
+
+.link a:hover {
+   color: #4A4A4A;
+   text-decoration: underline;
+}
+
+/** Menus **/
+
 #menu-quicklinks,
 #menu-quicklinks h2 {
   padding: 0;
@@ -999,8 +1011,6 @@ form.login input {
 #menu-quicklinks li.first {
   list-style: none;
 }
-
-/** Menus **/
 
 ul.menu, ul.menu li {
   color: #262626;
