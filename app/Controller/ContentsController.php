@@ -2,7 +2,7 @@
 class ContentsController extends AppController {
   public $name = 'Contents';
   
-  public $helpers = array('Html', 'Form', 'Paginator', 'Session'); 
+  public $helpers = array('Html', 'Form', 'Paginator', 'Session', 'Time'); 
 
   public $paginate = array(
     'fields' => array('id', 'title', 'type', 'status', 'author_id', 'created', 'modified', 'Author.username'),
@@ -17,11 +17,16 @@ class ContentsController extends AppController {
 
   public function loadContent($id) {
     $content = $this->Content->findByIdOrAlias($id, $id);
+    $this->Content->set($content);
+    $this->set('Content', $this->Content);
     if($content) {
       $type = $content['Content']['type'];
-      if($type != 'Content') {
-        $this->loadModel($type);
-        $content = array_merge($content, $this->$type->findByContentId($id));
+      $this->loadModel($type);
+      if($this->$type->name != 'Content') {
+        $extended = $this->$type->findByContentId($id);
+        $content = array_merge($content, $extended);
+        $this->$type->set($extended);
+        $this->set($type, $this->$type);
       }
     }
     return $content;
@@ -29,7 +34,8 @@ class ContentsController extends AppController {
 
   public function bindType($content) {
     $type = $content['Content']['type'];
-    if($type != 'Content') {
+    $this->loadModel($type);
+    if($this->$type->name != 'Content') {
       $this->Content->bindModel(
         array('hasOne' => array(
           $type => array(
@@ -39,6 +45,7 @@ class ContentsController extends AppController {
         )
       ), false);
     }
+    return $type;
   }
 
   public function display($id = 'home') {
@@ -56,7 +63,7 @@ class ContentsController extends AppController {
       $this->set('id', $this->request->data['Content']['alias'] ? 
         $this->request->data['Content']['alias'] : 
         $this->request->data['Content']['id']);
-      $this->set('content', $this->request->data);
+      $this->set('controller', $this);
       $this->render($type . '/display');
     }
     else if($id == 'home') {
@@ -96,9 +103,10 @@ class ContentsController extends AppController {
 
   public function add() {
     if($this->request->is('get')) {
-      $model = $this->request->query['type'];
-      $this->loadModel($model);
-      $this->render($model . '/add');
+      $type = $this->request->query['type'];
+      $this->loadModel($type);
+      $this->set('name', $this->$type->alias);
+      $this->render($type . '/add');
     }
     else if($this->request->is('post')) {
       $this->request->data['Content']['status'] = 'published';

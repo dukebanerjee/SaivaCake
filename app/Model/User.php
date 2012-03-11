@@ -33,5 +33,14 @@ class User extends AppModel {
     }
     return true;
   }
+  
+  public function get_name() {
+    if(array_key_exists('first_name', $this->data[$this->alias]) && 
+       array_key_exists('last_name', $this->data[$this->alias])) {
+      return $this->data[$this->alias]['first_name'] . ' ' . $this->data[$this->alias]['last_name'];
+    } else {
+      return $this->data[$this->alias]['username'];
+    }
+  }
 }
 ?>

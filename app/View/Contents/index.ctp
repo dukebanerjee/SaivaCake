@@ -34,7 +34,7 @@
   <tbody>
     <?php foreach($contents as $content): ?>
     <tr>
-      <td><?php echo $content['Content']['title']; ?></td>
+      <td><?php echo substr($content['Content']['title'], 0, 60); ?></td>
       <td><?php echo $content['Content']['type']; ?></td>
       <td><?php echo $content['Content']['status']; ?></td>
       <td><?php echo $content['Author']['username']; ?></td>
