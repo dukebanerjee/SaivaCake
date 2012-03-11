@@ -2,5 +2,5 @@
 
 <?php 
 echo $Content->data['Content']['content'];
-$this->extend('ViewList/' . $Content->data['ViewList']['type']);
+echo $this->element('ViewList/' . $Content->data['ViewList']['type']);
 ?>
