@@ -87,10 +87,10 @@ class ContentsController extends AppController {
 
   public function delete($id = null) {
     $deleted = false;    
-    $content = $this->Content->findById($id);
+    $content = $this->Content->findByIdOrAlias($id, $id);
     if($content) {
       $this->bindType($content);
-      if($this->Content->delete($id, true)) {
+      if($this->Content->delete($content['Content']['id'], true)) {
         $this->Session->setFlash('Content has been deleted');
         $deleted = true;
       }
@@ -131,6 +131,7 @@ class ContentsController extends AppController {
     $this->Content->id = $id;
     if($this->request->is('get')) {
       $this->request->data = $this->loadContent($id);
+      $id = $this->Content->id = $this->request->data['Content']['id'];
       if(!$this->request->data) {
         throw new NotFoundException();
       }
