@@ -1197,6 +1197,10 @@ ul.menu li {
   background-repeat: repeat-x;
 }
 
+ul.main-menu li {
+  padding-right: 1em;
+}
+
 ul.main-menu li ul {
   display: none;
   position: absolute;
