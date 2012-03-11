@@ -25,17 +25,12 @@ class Menu extends AppModel {
   }
 
   public function format_menu_definition($content_id) {
-    $menu_items = $this->find('threaded', array(
-        'conditions' => array('Menu.content_id' => $content_id)
+    $menu_items = $this->find('all', array(
+      'conditions' => array('Menu.content_id' => $content_id)
     ));
     $menu_defs = '';
     foreach($menu_items as $menu_item) {
-      if($menu_item[$this->alias]['content_id'] == $content_id) {
-        $menu_defs = $menu_defs . $this->format_menu_item($menu_item);
-        foreach($menu_item['children'] as $child_menu_item) {
-          $menu_defs = $menu_defs . $this->format_menu_item($child_menu_item);
-        }
-      }
+      $menu_defs = $menu_defs . $this->format_menu_item($menu_item);
     }
     return rtrim($menu_defs, '; ');
   }
