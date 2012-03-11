@@ -755,6 +755,18 @@ form.login input {
 
 /** SAIVA layout **/
 
+form#newsletter-form div,
+form#newsletter-form input {
+  float: left;
+  clear: none;
+  margin: 0;
+  padding: 0;
+}
+
+form#newsletter-form div {
+  margin-right: 10px;
+}
+
 div.news-item {
   border: 1px solid black;
   margin: 5px;
