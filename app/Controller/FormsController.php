@@ -3,13 +3,17 @@ App::uses('TimeHelper', 'View/Helper');
 class FormsController extends AppController {
   public $name = 'Forms';
 
-  public $helpers = array('Time'); 
+  public $helpers = array('Session', 'Time'); 
   
   public function submit() {
     $redirect = "/contents/display/home";
     foreach($this->request->data as $model => $values) {
       if($model != 'Submit') {
         $this->loadModel($model);
+        if($this->Session->check('Auth.User')) {
+          $user = $this->Session->read('Auth.User');
+          $values['username'] = $user['username'];
+        }
         $this->$model->save(array($model => $values));
 
         $form = $this->Form->findByType($model);
