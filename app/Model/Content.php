@@ -11,7 +11,7 @@ class Content extends AppModel {
   );
 
   public static function content_types() {
-    return array('Content', 'Document', 'Event', 'Form', 'News', 'ViewList');
+    return array('Article', 'Content', 'Document', 'Event', 'Form', 'News', 'ViewList');
   }
 
   public function replace_tokens($html) {
