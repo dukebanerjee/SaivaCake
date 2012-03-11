@@ -12,7 +12,8 @@ echo $this->Form->create('ViewList', array(
 echo $this->Form->input('Content.type', array('type' => 'hidden', 'value' => 'ViewList'));
 echo $this->fetch('id');
 echo $this->Form->input('Content.title');
-echo $this->Form->input('ViewList.name');
+echo $this->Form->input('ViewList.type');
+echo $this->Form->input('ViewList.view');
 echo $this->Form->input('ViewList.fields');
 echo $this->Form->input('ViewList.conditions');
 echo $this->Form->input('ViewList.order');
