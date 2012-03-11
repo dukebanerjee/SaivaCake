@@ -753,7 +753,7 @@ form.login input {
   margin-left: 5px;
 }
 
-/** SAIVA layout **/
+/** Newsletter form **/
 
 form#newsletter-form div,
 form#newsletter-form input {
@@ -766,6 +766,106 @@ form#newsletter-form input {
 form#newsletter-form div {
   margin-right: 10px;
 }
+
+/** Waiver form **/
+
+form#waiver-form {
+  font-size: 12px;
+}
+
+form#waiver-form div.input {
+  line-height: 2em;
+  clear: both;
+}
+
+form#waiver-form div.input label {
+  margin-right: 5px;
+  font-weight: bold;
+  vertical-align: baseline;
+  width: 10em;
+}
+
+form#waiver-form div.input input {
+  width: 30em;
+  vertical-align: baseline;
+}
+
+form#waiver-form div.zip {
+  clear: none;
+  margin-left: 5px;
+}
+
+form#waiver-form div.address input {
+  width: 20em;
+}
+
+form#waiver-form div.zip label {
+  clear: none;
+  width: auto;
+}
+
+form#waiver-form div.zip input {
+  clear: none;
+  width: 7em;
+}
+
+form#waiver-form div.contact_number label {
+  clear: none;
+  width: 25em;
+}
+
+form#waiver-form div.contact_number input {
+  clear: none;
+  width: 15em;
+}
+
+form#waiver-form div.organization label {
+  clear: none;
+  width: 17em;
+}
+
+form#waiver-form div.organization input {
+  clear: none;
+  width: 24em;
+}
+
+form#waiver-form fieldset {
+  float: left;
+  clear: none;
+  border: 1px solid black;
+}
+
+form#waiver-form legend {
+  font-size: 12px;
+  color: rgb(68, 68, 68);
+}
+
+form#waiver-form div.relationship label {
+  clear: none;
+  width: 13em;
+}
+
+form#waiver-form div.relationship input {
+  clear: none;
+  width: 27em;
+}
+
+form#waiver-form div.emergency_contact_number input {
+  clear: none;
+  width: 15em;
+}
+
+form#waiver-form div.emergency_contact_signature label {
+  clear: none;
+  width: 20em;
+}
+
+form#waiver-form div.emergency_contact_signature input {
+  clear: none;
+  width: 23em;
+}
+
+/** SAIVA layout **/
 
 div.news-item {
   border: 1px solid black;
