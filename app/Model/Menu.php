@@ -44,7 +44,7 @@ class Menu extends AppModel {
     return $menu_id . '|' . $title . '|' . $parent_id;
   }
 
-  public function update_menu_definition($content_id, $all_menu_defs) {
+  public function update_menu_definition($content_id, $all_menu_defs, $alias = null) {
     $menu_map = array();
     $ids_to_delete = array(); 
 
@@ -83,7 +83,7 @@ class Menu extends AppModel {
         $menu = array($this->alias => array(
           'controller' => 'contents',
           'action' => 'display',
-          'parameter' => $content_id,
+          'parameter' => $alias ? $alias : $content_id,
           'menu_id' => $menu_id,
           'index' => $index,
           'title' => $title,

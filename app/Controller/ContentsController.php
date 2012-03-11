@@ -23,7 +23,7 @@ class ContentsController extends AppController {
       $type = $content['Content']['type'];
       $this->loadModel($type);
       if($this->$type->name != 'Content') {
-        $extended = $this->$type->findByContentId($id);
+        $extended = $this->$type->findByContentId($content['Content']['id']);
         $content = array_merge($content, $extended);
         $this->$type->set($extended);
         $this->set($type, $this->$type);
@@ -116,7 +116,7 @@ class ContentsController extends AppController {
       if($this->Content->saveAll($this->request->data)) {
         $this->Session->setFlash('Content has been added.');
         $this->loadModel('Menu');
-        $this->Menu->update_menu_definition($this->Content->id, $this->request->data['Content']['__menu']);
+        $this->Menu->update_menu_definition($this->Content->id, $this->request->data['Content']['__menu'], $this->request->data['Content']['alias']);
         $this->redirect(array('action' => 'index'));
       }
       else {
@@ -142,7 +142,7 @@ class ContentsController extends AppController {
       $this->bindType($this->request->data);
       if($this->Content->saveAll($this->request->data)) {
         $this->Session->setFlash('Content has been updated.');
-        $this->Menu->update_menu_definition($id, $this->request->data['Content']['__menu']);
+        $this->Menu->update_menu_definition($id, $this->request->data['Content']['__menu'], $this->request->data['Content']['alias']);
         $this->redirect(array('action' => 'index'));
       }
       else {
