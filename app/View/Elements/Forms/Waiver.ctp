@@ -31,7 +31,7 @@ echo $this->Form->input('Waiver.volunteer_name');
 echo $this->Form->input('Waiver.volunteer_address', array(
   'div' => array('class' => 'address input')
 ));
-echo $this->Form->input('Waiver.volunteer_zip', array('label' => 'ZIP', 
+echo $this->Form->input('Waiver.zip', array('label' => 'ZIP', 
   'div' => array('class' => 'zip input')
 ));
 echo $this->Form->input('Waiver.contact_number', array(
