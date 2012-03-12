@@ -1,5 +1,6 @@
 <?php
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('CakeEmail', 'Network/Email');
 
 class UsersController extends AppController {
   public $name = 'Users';
@@ -24,6 +25,41 @@ class UsersController extends AppController {
 
   public function logout() {
       $this->redirect($this->Auth->logout());
+  }
+  
+  public function signup() {
+      $redirect = '/contents/display/home';
+      $this->loadModel('Form');
+      $form_config = $this->Form->findByType('User');
+      $this->User->set($this->request->data);
+      $this->User->initial_signup();
+      $user = $this->User->save();
+      if($user) {
+        if($form_config) {
+          if($form_config['Form']['success_page']) {
+            $redirect = $form_config['Form']['success_page'];
+          }
+          if($form_config['Form']['success_email']) {
+            
+            $email = new CakeEmail();
+            $email->template('signup');
+            $email->viewVars(array(
+              'first_name' => $user['User']['first_name'],
+              'last_name' => $user['User']['last_name'],
+              'url' => '/users/verify/' . $this->User->id . '/' . $user['User']['password']
+            ));
+            $email->emailFormat('text');
+            $email->subject('Please activate your account');
+            $email->to($user['User']['email']);
+            $email->from($form_config['Form']['success_email']);
+            $email->send();
+          }
+        }
+      }
+      else {
+        $this->Session->setFlash('Unable to sign up');
+      }
+      $this->redirect($redirect);
   }
 
   public function index() {

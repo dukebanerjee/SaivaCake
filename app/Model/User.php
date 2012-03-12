@@ -42,5 +42,19 @@ class User extends AppModel {
       return $this->data[$this->alias]['username'];
     }
   }
+  
+  public function random_password() {
+    $chars = "0123456789abcdefghijklmnopqrstuvwyz$%_!";
+    $password = '';
+    for($i = 0; $i < 28; $i++) {
+      $password .= substr($chars, rand(0, strlen($chars)), 1);
+    }
+    return $password;
+  }
+  
+  public function initial_signup() {
+    $this->data[$this->alias]['password'] = $this->random_password();
+    $this->data[$this->alias]['status'] = 'pending';
+  }
 }
 ?>
