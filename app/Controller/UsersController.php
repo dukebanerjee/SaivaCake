@@ -40,7 +40,6 @@ class UsersController extends AppController {
             $redirect = $form_config['Form']['success_page'];
           }
           if($form_config['Form']['success_email']) {
-            
             $email = new CakeEmail();
             $email->template('signup');
             $email->viewVars(array(
