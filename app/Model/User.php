@@ -56,5 +56,10 @@ class User extends AppModel {
     $this->data[$this->alias]['password'] = $this->random_password();
     $this->data[$this->alias]['status'] = 'pending';
   }
+  
+  public function activate($request) {
+    $this->set($request->data);
+    $this->data[$this->alias]['status'] = 'active';
+  }
 }
 ?>

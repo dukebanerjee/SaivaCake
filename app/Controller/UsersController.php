@@ -45,7 +45,7 @@ class UsersController extends AppController {
             $email->viewVars(array(
               'first_name' => $user['User']['first_name'],
               'last_name' => $user['User']['last_name'],
-              'url' => '/users/verify/' . $this->User->id . '/' . $user['User']['password']
+              'url' => '/users/activate/' . $this->User->id . '/' . $user['User']['password']
             ));
             $email->emailFormat('text');
             $email->subject('Please activate your account');
@@ -59,6 +59,32 @@ class UsersController extends AppController {
         $this->Session->setFlash('Unable to sign up');
       }
       $this->redirect($redirect);
+  }
+
+  public function activate($id, $key) {
+    $user = $this->User->findByIdAndPassword($id, $key);
+    if($user) {
+      if($this->request->is('get')) {
+        $user['User']['password'] = '';
+        $this->request->data = $user;
+      }
+      else if($this->request->is('put')) {
+        $this->User->id = $id;
+        $this->User->activate($this->request);
+        if($this->User->save(null, true, 
+            array('password', '__repeat_password', 'status'))) {
+          $this->Auth->login($user['User']);
+          $this->render('activated');
+        }
+        else {
+          $this->Session->setFlash('Unable to activate account');
+          $this->redirect('/contents/display/home');
+        }
+      }
+    }
+    else {
+      throw new UnauthorizedException();
+    }
   }
 
   public function index() {
